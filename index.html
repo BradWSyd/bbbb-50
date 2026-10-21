@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<title>B.B.B.B 50 · Brad’s Big Birthday Bash · RSVP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --paper: #FFFDFD;
+    --paper-soft: rgba(255, 253, 253, 0.66);
+    --paper-faint: rgba(255, 253, 253, 0.16);
+    --crusta: #FD7B33;      /* swap for the v1.2 design-system value if it differs */
+    --razzmatazz: #E30B5C;  /* swap for the v1.2 design-system value if it differs */
+    --font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    color-scheme: dark;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { background: var(--black); }
+  body {
+    margin: 0;
+    background: var(--black);
+    color: var(--paper);
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: min(100% - 2.5rem, 40rem); margin-inline: auto; }
+
+  /* Hero */
+  .hero { padding: clamp(3rem, 10vw, 6rem) 0 2.5rem; text-align: center; }
+  .hero img { width: 100%; height: auto; display: block; }
+  .hero h1 {
+    margin: 2rem 0 0.5rem;
+    font-weight: 500;
+    font-size: clamp(0.8rem, 2.6vw, 1rem);
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    padding-left: 0.38em; /* balance the tracking */
+  }
+  .hero p {
+    margin: 0;
+    color: var(--paper-soft);
+    font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding-left: 0.3em;
+  }
+
+  /* Details */
+  .details { border-top: 1px solid var(--paper-faint); padding: 2.5rem 0; }
+  .details dl { margin: 0; display: grid; gap: 1.5rem; }
+  .details dt { color: var(--crusta); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .details dd { margin: 0; }
+  .details dd small { display: block; color: var(--paper-soft); font-size: 0.95rem; }
+  .details a { color: var(--paper); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
+
+  /* Link to the memories timeline */
+  .memories { border-top: 1px solid var(--paper-faint); padding: 2rem 0; }
+  .mem-link { display: block; text-decoration: none; color: var(--paper); }
+  .mem-link span { display: block; font-weight: 300; font-size: clamp(1.6rem, 6.5vw, 2.1rem); line-height: 1.15; }
+  .mem-link small { display: block; margin-top: 0.35rem; color: var(--paper-soft); font-size: 0.95rem; }
+  .mem-link b { color: var(--crusta); font-weight: 600; }
+
+  /* Form */
+  .rsvp { border-top: 1px solid var(--paper-faint); padding: 2.5rem 0 4rem; }
+  .rsvp h2 { font-weight: 300; font-size: clamp(2rem, 8vw, 2.75rem); line-height: 1.1; margin: 0 0 0.5rem; }
+  .rsvp .lede { color: var(--paper-soft); margin: 0 0 2.25rem; }
+  .field { margin-bottom: 2rem; border: 0; padding: 0; min-width: 0; }
+  label, legend { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.6rem; padding: 0; }
+  .hint { display: block; font-weight: 400; color: var(--paper-soft); font-size: 0.9rem; margin-top: 0.15rem; }
+  input[type="text"], input[type="tel"], input[type="email"], textarea {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--paper-soft);
+    color: var(--paper);
+    font: inherit;
+    font-size: 1.15rem;
+    padding: 0.5rem 0 0.6rem;
+    border-radius: 0;
+  }
+  textarea { min-height: 6rem; resize: vertical; border: 1px solid var(--paper-faint); padding: 0.75rem; }
+  input:focus, textarea:focus { outline: none; border-color: var(--crusta); }
+  :focus-visible { outline: 2px solid var(--crusta); outline-offset: 3px; }
+
+  /* Choice pills */
+  .choices { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .choice span {
+    display: inline-block;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid var(--paper-soft);
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.98rem;
+  }
+  .choice input:checked + span { background: var(--paper); color: var(--black); border-color: var(--paper); }
+  .choice input:focus-visible + span { outline: 2px solid var(--crusta); outline-offset: 3px; }
+
+  /* The "Me +" counter: the one loud moment on the page */
+  .party { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+  .party-me { font-weight: 300; font-size: clamp(3rem, 14vw, 4.5rem); line-height: 1; }
+  .party-count {
+    font-weight: 600;
+    font-size: clamp(3rem, 14vw, 4.5rem);
+    line-height: 1;
+    color: var(--crusta);
+    min-width: 1.2ch;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .party button {
+    width: 3rem; height: 3rem;
+    border-radius: 50%;
+    border: 1px solid var(--paper-soft);
+    background: transparent;
+    color: var(--paper);
+    font: inherit;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .party button:disabled { opacity: 0.3; cursor: default; }
+  .party-note { width: 100%; color: var(--paper-soft); font-size: 0.95rem; margin: 0; }
+
+  .is-hidden { display: none !important; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .send {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 1rem 2rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--crusta);
+    color: var(--black);
+    font: inherit;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+  }
+  .send:disabled { opacity: 0.6; cursor: progress; }
+  .error { color: var(--paper); border-left: 3px solid var(--razzmatazz); padding: 0.25rem 0 0.25rem 0.9rem; margin: 1.25rem 0 0; }
+  .field-error { color: var(--razzmatazz); font-size: 0.9rem; margin: 0.4rem 0 0; }
+
+  /* Done state */
+  .done { padding: 1rem 0 4rem; }
+  .done h2 { font-weight: 300; font-size: clamp(2.25rem, 9vw, 3.25rem); line-height: 1.1; margin: 0 0 1rem; }
+  .done h2 b { font-weight: 600; color: var(--crusta); }
+  .done p { margin: 0 0 1rem; }
+  .ghost {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    border: 1px solid var(--paper);
+    border-radius: 999px;
+    color: var(--paper);
+    background: transparent;
+    font: inherit;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  footer { border-top: 1px solid var(--paper-faint); padding: 1.5rem 0 2.5rem; color: var(--paper-soft); font-size: 0.85rem; }
+  footer a { color: var(--paper-soft); text-decoration-color: var(--crusta); }
+
+  @media (min-width: 40rem) {
+    .details dl { grid-template-columns: 1fr 1fr; column-gap: 2.5rem; }
+    .details .wide { grid-column: 1 / -1; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .party-count.bump { animation: bump 220ms ease-out; }
+    @keyframes bump { 50% { transform: scale(1.18); } }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img src="assets/bbbb-mark.png" width="896" height="353" alt="B.B.B.B Fifty">
+    <h1>Brad’s Big Birthday Bash</h1>
+    <p>Saturday 21 November 2026 · Sydney</p>
+  </div>
+</header>
+
+<main>
+  <section class="details" aria-label="Party details">
+    <div class="wrap">
+      <dl>
+        <div>
+          <dt>When</dt>
+          <dd>Saturday 21 November, 2pm to 7pm<small>Drop in, drop out. Off to a gig that night? You’re done by 7.</small></dd>
+        </div>
+        <div>
+          <dt>Where</dt>
+          <dd>Wentworth Bar, Level 5<small>Sofitel Sydney Wentworth, 61–101 Phillip St</small></dd>
+        </div>
+        <div>
+          <dt>What’s on</dt>
+          <dd>First rounds on Brad from 2pm<small>Platters at 3pm. Happy hour from 4pm.</small></dd>
+        </div>
+        <div>
+          <dt>Dress code</dt>
+          <dd>Fancy beer garden vibes<small>Think sunny terrace and garden party. Not fancy dress.</small></dd>
+        </div>
+        <div class="wide">
+          <dt>Getting there</dt>
+          <dd>Martin Place station is a short walk.<small>The bar has covered areas, so it’s on rain or shine.</small></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="memories" aria-label="Twenty years of B.B.B.B">
+    <div class="wrap">
+      <a class="mem-link" href="memories.html"><span>Twenty years of B.B.B.B</span><small>Scroll back through every bash since 2006 and find yourself. <b>See the memories →</b></small></a>
+    </div>
+  </section>
+
+  <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
+    <div class="wrap">
+      <h2 id="rsvp-title">Are you in?</h2>
+      <p class="lede">Please RSVP by Tuesday 10 November.</p>
+
+      <form id="rsvp-form" novalidate>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required maxlength="80">
+        </div>
+
+        <div class="field">
+          <label for="mobile">Mobile</label>
+          <input id="mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required maxlength="20">
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span class="hint">The details and a calendar invite land here.</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required maxlength="120">
+        </div>
+
+        <fieldset class="field" id="attending-field">
+          <legend>Are you coming?</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="attending" value="Yes" required><span>Yes</span></label>
+            <label class="choice"><input type="radio" name="attending" value="Maybe"><span>Maybe</span></label>
+            <label class="choice"><input type="radio" name="attending" value="No"><span>Can’t make it</span></label>
+          </div>
+        </fieldset>
+
+        <div class="if-coming">
+          <fieldset class="field">
+            <legend>Who’s coming?</legend>
+            <div class="party">
+              <span class="party-me" aria-hidden="true">Me +</span>
+              <button type="button" id="minus" aria-label="One less guest">−</button>
+              <output class="party-count" id="count" for="guests" aria-live="polite">0</output>
+              <button type="button" id="plus" aria-label="One more guest">+</button>
+              <p class="party-note" id="party-note">Just you so far.</p>
+            </div>
+            <input type="hidden" id="guests" name="guests" value="0">
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Roughly when will you arrive?</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="arrival" value="2–4pm"><span>2–4pm</span></label>
+              <label class="choice"><input type="radio" name="arrival" value="4–5pm"><span>4–5pm</span></label>
+              <label class="choice"><input type="radio" name="arrival" value="5–7pm"><span>5–7pm</span></label>
+              <label class="choice"><input type="radio" name="arrival" value="Not sure"><span>Not sure</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="dietary">Dietary needs or allergies <span class="hint">Helps Brad choose the platters.</span></label>
+            <input id="dietary" name="dietary" type="text" maxlength="200">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="message">A message for Brad <span class="hint">Optional. A memory, a roast, a wish for the next 50.</span></label>
+          <textarea id="message" name="message" maxlength="1000"></textarea>
+        </div>
+
+        <fieldset class="field" id="photos-field">
+          <legend>Happy to appear in photos Brad posts online?</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="photos" value="Yes" required><span>Yes</span></label>
+            <label class="choice"><input type="radio" name="photos" value="No"><span>No thanks</span></label>
+          </div>
+        </fieldset>
+
+        <div class="trap" aria-hidden="true">
+          <label for="website">Leave this empty</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="send" type="submit" id="send">Send my RSVP</button>
+        <p class="error is-hidden" id="form-error" role="alert"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="done is-hidden" id="done" aria-live="polite" tabindex="-1">
+    <div class="wrap">
+      <h2 id="done-title"></h2>
+      <p id="done-body"></p>
+      <p id="done-where">Wentworth Bar, Level 5, Sofitel Sydney Wentworth, 61–101 Phillip St, Sydney. Saturday 21 November, 2pm to 7pm.</p>
+      <button class="ghost" type="button" id="add-cal">Add to calendar</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">B.B.B.B 50. Fifty years in the making. <a href="memories.html">The memories</a></div>
+</footer>
+
+<script>
+  /* ---------- Settings ---------- */
+  // Paste the Apps Script web app URL here (ends in /exec).
+  const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzY_YGrq125QML7GPaNM6XXAENKaf2xvvha5TsucUMzqFYTuMjxE1szlVegQvaMo3v8Pw/exec";
+  const MAX_GUESTS = 6;
+
+  /* ---------- "Me +" counter ---------- */
+  const form = document.getElementById("rsvp-form");
+  const guestsInput = document.getElementById("guests");
+  const countEl = document.getElementById("count");
+  const minus = document.getElementById("minus");
+  const plus = document.getElementById("plus");
+  const note = document.getElementById("party-note");
+
+  function setGuests(n) {
+    n = Math.max(0, Math.min(MAX_GUESTS, n));
+    guestsInput.value = n;
+    countEl.textContent = n;
+    minus.disabled = n === 0;
+    plus.disabled = n === MAX_GUESTS;
+    note.textContent = n === 0 ? "Just you so far." : `That’s ${n + 1} of you.`;
+    countEl.classList.remove("bump");
+    void countEl.offsetWidth;
+    countEl.classList.add("bump");
+  }
+  minus.addEventListener("click", () => setGuests(+guestsInput.value - 1));
+  plus.addEventListener("click", () => setGuests(+guestsInput.value + 1));
+  setGuests(0);
+
+  /* ---------- Hide "coming" questions for a No ---------- */
+  const comingBlock = document.querySelector(".if-coming");
+  form.addEventListener("change", (e) => {
+    if (e.target.name === "attending") {
+      comingBlock.classList.toggle("is-hidden", e.target.value === "No");
+    }
+  });
+
+  /* ---------- Validation ---------- */
+  function showFieldError(el, msg) {
+    clearFieldError(el);
+    const p = document.createElement("p");
+    p.className = "field-error";
+    p.textContent = msg;
+    el.closest(".field").appendChild(p);
+  }
+  function clearFieldError(el) {
+    const old = el.closest(".field").querySelector(".field-error");
+    if (old) old.remove();
+  }
+  function validate() {
+    let first = null;
+    const flag = (el, msg) => { showFieldError(el, msg); first = first || el; };
+    const f = form.elements;
+    const name = f["name"].value.trim();
+    const mobile = f["mobile"].value.replace(/[^\d+]/g, "");
+    const email = f["email"].value.trim();
+    [f["name"], f["mobile"], f["email"]].forEach(clearFieldError);
+    clearFieldError(document.querySelector('[name="attending"]'));
+    clearFieldError(document.querySelector('[name="photos"]'));
+
+    if (!name) flag(f["name"], "Add your name.");
+    if (mobile.length < 8) flag(f["mobile"], "Add a mobile number Brad can text.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) flag(f["email"], "Add an email address, like name@example.com.");
+    if (!form.querySelector('[name="attending"]:checked')) flag(document.querySelector('[name="attending"]'), "Choose Yes, Maybe or Can’t make it.");
+    if (!form.querySelector('[name="photos"]:checked')) flag(document.querySelector('[name="photos"]'), "Choose Yes or No thanks.");
+    if (first) first.focus();
+    return !first;
+  }
+
+  /* ---------- Submit ---------- */
+  const sendBtn = document.getElementById("send");
+  const formError = document.getElementById("form-error");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    formError.classList.add("is-hidden");
+    if (!validate()) return;
+
+    const data = new URLSearchParams(new FormData(form));
+    if (data.get("attending") === "No") { data.set("guests", "0"); data.delete("arrival"); data.delete("dietary"); }
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending…";
+    try {
+      if (RSVP_ENDPOINT.startsWith("http")) {
+        // Apps Script can't send a readable reply to another site, so we
+        // send and treat a completed request as success.
+        await fetch(RSVP_ENDPOINT, { method: "POST", mode: "no-cors", body: data });
+      } else {
+        console.warn("RSVP_ENDPOINT not set: running in preview mode, nothing saved.", Object.fromEntries(data));
+        await new Promise((r) => setTimeout(r, 600));
+      }
+      showDone(data.get("name"), data.get("attending"), +data.get("guests"));
+    } catch (err) {
+      formError.textContent = "Your RSVP didn’t send. Check your connection and press Send my RSVP again, or reply to Brad’s invite message.";
+      formError.classList.remove("is-hidden");
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send my RSVP";
+    }
+  });
+
+  /* ---------- Done screen ---------- */
+  function showDone(name, attending, guests) {
+    const first = (name || "").trim().split(/\s+/)[0];
+    const title = document.getElementById("done-title");
+    const body = document.getElementById("done-body");
+    const cal = document.getElementById("add-cal");
+    const where = document.getElementById("done-where");
+    title.textContent = "";
+    if (attending === "No") {
+      title.append(`Thanks, ${first}.`);
+      body.textContent = "Brad will miss you. Your message, if you left one, is on its way to him.";
+      cal.classList.add("is-hidden");
+      where.classList.add("is-hidden");
+    } else {
+      const b = document.createElement("b");
+      b.textContent = attending === "Yes" ? `You’re in, ${first}.` : `Noted as a maybe, ${first}.`;
+      title.append(b);
+      body.textContent = (guests > 0 ? `Party of ${guests + 1}. ` : "") + "Check your email for the details and a calendar invite.";
+    }
+    document.getElementById("rsvp").classList.add("is-hidden");
+    const done = document.getElementById("done");
+    done.classList.remove("is-hidden");
+    done.focus();
+    done.scrollIntoView({ block: "start" });
+  }
+
+  /* ---------- Calendar file ---------- */
+  document.getElementById("add-cal").addEventListener("click", () => {
+    const ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//BBBB50//RSVP//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      "UID:bbbb50-20261121@bbbb-50",
+      "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z",
+      "DTSTART:20261121T030000Z",
+      "DTEND:20261121T080000Z",
+      "SUMMARY:B.B.B.B 50 – Brad’s Big Birthday Bash",
+      "LOCATION:Wentworth Bar\\, Level 5\\, Sofitel Sydney Wentworth\\, 61–101 Phillip St\\, Sydney NSW 2000",
+      "DESCRIPTION:Drop in from 2pm. Platters at 3pm. Happy hour from 4pm. Dress code: fancy beer garden vibes.",
+      "END:VEVENT", "END:VCALENDAR"
+    ].join("\r\n");
+    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    const a = document.createElement("a");
+    a.href = url; a.download = "BBBB50.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+</script>
+</body>
+</html>

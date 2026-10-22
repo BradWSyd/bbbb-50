@@ -30,8 +30,10 @@
   .hero h1{margin:1.75rem 0 .5rem;font-weight:500;font-size:clamp(.8rem,2.6vw,1rem);letter-spacing:.38em;text-transform:uppercase;padding-left:.38em}
   .hero p{margin:0 auto;max-width:30rem;color:var(--paper-soft)}
   nav.years{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-block:1px solid var(--paper-faint)}
-  nav.years .wrap{display:flex;gap:.4rem;overflow-x:auto;padding:.7rem 0;scrollbar-width:none}
-  nav.years .wrap::-webkit-scrollbar{display:none}
+  nav.years .wrap{display:flex;align-items:center;gap:.6rem;padding:.7rem 0}
+  nav.years .chips{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+  nav.years .chips::-webkit-scrollbar{display:none}
+  nav.years a.home{background:var(--crusta);color:var(--black);border-color:var(--crusta);font-weight:600}
   nav.years a{flex:none;text-decoration:none;font-weight:500;font-size:.9rem;padding:.35rem .8rem;border:1px solid var(--paper-faint);border-radius:999px;font-variant-numeric:tabular-nums}
   nav.years a.on{background:var(--paper);color:var(--black);border-color:var(--paper)}
   nav.years a.now{border-color:var(--crusta);color:var(--crusta)}
@@ -79,7 +81,7 @@
     <p>From Circular Quay in 2006 to RÜFÜS DU SOL in 2025. Scroll back through the years and find yourself.</p>
   </div>
 </header>
-<nav class="years" aria-label="Jump to a year"><div class="wrap"><a href="#y1976">1976</a><a href="#y2006">2006</a><a href="#y2007">2007</a><a href="#y2009">2009</a><a href="#y2010">2010</a><a href="#y2011">2011</a><a href="#y2013">2013</a><a href="#y2014">2014</a><a href="#y2015">2015</a><a href="#y2016">2016</a><a href="#y2017">2017</a><a href="#y2019">2019</a><a href="#y2020">2020</a><a href="#y2021">2021</a><a href="#y2022">2022</a><a href="#y2023">2023</a><a href="#y2024">2024</a><a href="#y2025">2025</a><a href="#y2026" class="now">2026</a></div></nav>
+<nav class="years" aria-label="Jump to a year"><div class="wrap"><a class="home" href="index.html#rsvp">← RSVP</a><div class="chips"><a href="#y1976">1976</a><a href="#y2006">2006</a><a href="#y2007">2007</a><a href="#y2009">2009</a><a href="#y2010">2010</a><a href="#y2011">2011</a><a href="#y2013">2013</a><a href="#y2014">2014</a><a href="#y2015">2015</a><a href="#y2016">2016</a><a href="#y2017">2017</a><a href="#y2019">2019</a><a href="#y2020">2020</a><a href="#y2021">2021</a><a href="#y2022">2022</a><a href="#y2023">2023</a><a href="#y2024">2024</a><a href="#y2025">2025</a><a href="#y2026" class="now">2026</a></div></div></nav>
 <main>
 <section class="year" id="y1976" aria-labelledby="t1976">
   <div class="wrap">
@@ -219,7 +221,7 @@
     <a class="cta" href="index.html#rsvp">RSVP for B.B.B.B 50</a>
   </div></section>
 </main>
-<footer><div class="wrap">B.B.B.B 50. Fifty years in the making.</div></footer>
+<footer><div class="wrap"><a href="index.html#rsvp">← Back to the RSVP</a> · B.B.B.B 50. Fifty years in the making.</div></footer>
 
 <dialog id="lb" aria-label="Photo viewer">
   <div class="lb">
@@ -233,7 +235,7 @@
 
 <script>
   /* Highlight the current year in the jump bar */
-  const links=[...document.querySelectorAll("nav.years a")];
+  const links=[...document.querySelectorAll("nav.years .chips a")];
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
     links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));
     const on=links.find(a=>a.classList.contains("on")); if(on) on.scrollIntoView({inline:"center",block:"nearest"});

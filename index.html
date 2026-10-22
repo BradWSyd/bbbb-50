@@ -165,6 +165,9 @@
   .privacy { margin: 2rem 0 0; color: var(--paper-soft); font-size: 0.85rem; line-height: 1.5; max-width: 36rem; }
   .privacy b { color: var(--paper); font-weight: 600; }
   .privacy a { color: var(--paper-soft); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
+  a.send, a.ghost { text-decoration: none; }
+  .cal-links { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .cal-links a { margin-top: 0.5rem; }
   .ghost {
     display: inline-block;
     margin-top: 0.5rem;
@@ -238,7 +241,7 @@
   <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
     <div class="wrap">
       <h2 id="rsvp-title">Are you in?</h2>
-      <p class="lede">Please RSVP by Tuesday 10 November.</p>
+      <p class="lede">Please RSVP by Tuesday 10 November. Plans changed? Fill this in again with the same mobile or email, and it updates your reply.</p>
 
       <form id="rsvp-form" novalidate>
         <div class="field">
@@ -247,12 +250,12 @@
         </div>
 
         <div class="field">
-          <label for="mobile">Mobile</label>
-          <input id="mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required maxlength="20">
+          <label for="mobile">Mobile <span class="hint">Add a mobile, an email, or both, so Brad can reach you.</span></label>
+          <input id="mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" maxlength="20">
         </div>
 
         <div class="field">
-          <label for="email">Email (optional) <span class="hint">Share your email if you’d like a calendar invite sent straight away.</span></label>
+          <label for="email">Email <span class="hint">Share your email if you’d like a calendar invite sent straight away.</span></label>
           <input id="email" name="email" type="email" autocomplete="email" maxlength="120">
         </div>
 
@@ -313,7 +316,7 @@
       <h2 id="done-title"></h2>
       <p id="done-body"></p>
       <p id="done-where">Wentworth Bar, Level 5, Sofitel Sydney Wentworth, 61–101 Phillip St, Sydney. Saturday 21 November, 2pm to 7pm.</p>
-      <button class="ghost" type="button" id="add-cal">Add to calendar</button>
+      <div class="cal-links"><a class="ghost" id="add-cal" href="BBBB50.ics">Add to calendar</a> <a class="ghost" id="add-gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=B.B.B.B%2050%20%E2%80%93%20Brad%E2%80%99s%20Big%20Birthday%20Bash&dates=20261121T030000Z/20261121T080000Z&details=Drop%20in%20from%202pm.%20Platters%20at%203pm.%20Happy%20hour%20from%204pm.%20https%3A//bbbb50.brad-wright.com&location=Wentworth%20Bar%2C%20Level%205%2C%20Sofitel%20Sydney%20Wentworth%2C%2061%E2%80%93101%20Phillip%20St%2C%20Sydney%20NSW%202000" target="_blank" rel="noopener">Google Calendar</a></div>
     </div>
   </section>
 </main>
@@ -382,7 +385,8 @@
     clearFieldError(document.querySelector('[name="attending"]'));
 
     if (!name) flag(f["name"], "Add your name.");
-    if (mobile.length < 8) flag(f["mobile"], "Add a mobile number Brad can text.");
+    if (!mobile && !email) flag(f["mobile"], "Add a mobile or an email so Brad can reach you.");
+    else if (mobile && mobile.replace(/\D/g, "").length < 8) flag(f["mobile"], "Check your mobile number. Or leave it blank and use email.");
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) flag(f["email"], "Check your email address, like name@example.com. Or leave it blank.");
     if (!form.querySelector('[name="attending"]:checked')) flag(document.querySelector('[name="attending"]'), "Choose Yes, Maybe or Can’t make it.");
     if (first) first.focus();
@@ -427,12 +431,14 @@
     const title = document.getElementById("done-title");
     const body = document.getElementById("done-body");
     const cal = document.getElementById("add-cal");
+    const gcal = document.getElementById("add-gcal");
     const where = document.getElementById("done-where");
     title.textContent = "";
     if (attending === "No") {
       title.append(`Thanks, ${first}.`);
-      body.textContent = "Brad will miss you. Your message, if you left one, is on its way to him.";
+      body.textContent = "Brad will miss you. Change your mind? Come back and RSVP again with the same mobile or email.";
       cal.classList.add("is-hidden");
+      gcal.classList.add("is-hidden");
       where.classList.add("is-hidden");
     } else {
       const b = document.createElement("b");
@@ -451,26 +457,6 @@
     done.scrollIntoView({ block: "start" });
   }
 
-  /* ---------- Calendar file ---------- */
-  document.getElementById("add-cal").addEventListener("click", () => {
-    const ics = [
-      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//BBBB50//RSVP//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
-      "BEGIN:VEVENT",
-      "UID:bbbb50-20261121@bbbb-50",
-      "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z",
-      "DTSTART:20261121T030000Z",
-      "DTEND:20261121T080000Z",
-      "SUMMARY:B.B.B.B 50 – Brad’s Big Birthday Bash",
-      "LOCATION:Wentworth Bar\\, Level 5\\, Sofitel Sydney Wentworth\\, 61–101 Phillip St\\, Sydney NSW 2000",
-      "DESCRIPTION:Drop in from 2pm. Platters at 3pm. Happy hour from 4pm. Dress code: fancy beer garden vibes.",
-      "END:VEVENT", "END:VCALENDAR"
-    ].join("\r\n");
-    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
-    const a = document.createElement("a");
-    a.href = url; a.download = "BBBB50.ics";
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  });
 </script>
 </body>
 </html>

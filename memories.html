@@ -17,9 +17,9 @@
     color-scheme:dark; box-sizing:border-box;
   }
   *,*::before,*::after{box-sizing:inherit}
-  html{background:var(--black);scroll-behavior:smooth;scroll-padding-top:4.5rem}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{margin:0;background:var(--black);color:var(--paper);font-family:var(--font);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
+  html{background:var(--black);scroll-padding-top:4.5rem}
+  html,body{overflow-x:clip}
+    body{margin:0;background:var(--black);color:var(--paper);font-family:var(--font);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
   .wrap{width:min(100% - 2rem,64rem);margin-inline:auto}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   a{color:var(--paper);text-underline-offset:.2em;text-decoration-color:var(--crusta)}
@@ -29,9 +29,9 @@
   .hero img{width:min(100%,36rem);height:auto}
   .hero h1{margin:1.75rem 0 .5rem;font-weight:500;font-size:clamp(.8rem,2.6vw,1rem);letter-spacing:.38em;text-transform:uppercase;padding-left:.38em}
   .hero p{margin:0 auto;max-width:30rem;color:var(--paper-soft)}
-  nav.years{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-block:1px solid var(--paper-faint)}
+  nav.years{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.94);border-block:1px solid var(--paper-faint)}
   nav.years .wrap{display:flex;align-items:center;gap:.6rem;padding:.7rem 0}
-  nav.years .chips{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+  nav.years .chips{position:relative;display:flex;gap:.4rem;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;min-width:0;flex:1}
   nav.years .chips::-webkit-scrollbar{display:none}
   nav.years a.home{background:var(--crusta);color:var(--black);border-color:var(--crusta);font-weight:600}
   nav.years a{flex:none;text-decoration:none;font-weight:500;font-size:.9rem;padding:.35rem .8rem;border:1px solid var(--paper-faint);border-radius:999px;font-variant-numeric:tabular-nums}
@@ -234,27 +234,71 @@
 </dialog>
 
 <script>
-  /* Highlight the current year in the jump bar */
-  const links=[...document.querySelectorAll("nav.years .chips a")];
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
-    links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));
-    const on=links.find(a=>a.classList.contains("on")); if(on) on.scrollIntoView({inline:"center",block:"nearest"});
-  }})},{rootMargin:"-30% 0px -60% 0px"});
+  /* Year bar: highlight the year on screen and keep its chip in view.
+     Only the chip row scrolls sideways; the page itself is never moved. */
+  const nav=document.querySelector("nav.years");
+  const chips=nav.querySelector(".chips");
+  const links=[...chips.querySelectorAll("a")];
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let current=null, jumping=false, jumpTimer=0;
+  function setOn(id){
+    if(id===current) return;
+    current=id;
+    let on=null;
+    links.forEach(a=>{const hit=a.getAttribute("href")==="#"+id; a.classList.toggle("on",hit); if(hit) on=a;});
+    if(on){
+      const left=on.offsetLeft-(chips.clientWidth-on.offsetWidth)/2;
+      chips.scrollTo({left:Math.max(0,left),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  const io=new IntersectionObserver(es=>{
+    if(jumping) return;
+    es.forEach(e=>{if(e.isIntersecting) setOn(e.target.id);});
+  },{rootMargin:"-30% 0px -60% 0px"});
   document.querySelectorAll("section.year").forEach(s=>io.observe(s));
-  addEventListener("scroll",()=>{if(innerHeight+scrollY>=document.body.scrollHeight-4){links.forEach(a=>a.classList.toggle("on",a.classList.contains("now")));}},{passive:true});
+  // The last section is short, so light up 2026 once its RSVP button is fully on screen.
+  const cta=document.querySelector(".finale .cta");
+  if(cta) new IntersectionObserver(es=>{if(!jumping&&es[0].isIntersecting)setOn("y2026");},{threshold:1}).observe(cta);
 
   /* Load photos well before they scroll into view, so a fast swipe on a phone
      doesn't land on empty tiles. Tapping a year loads that year straight away. */
-  const lazy=[...document.querySelectorAll('img[loading="lazy"]')];
   const eager=img=>{if(img.loading!=="eager")img.loading="eager";};
-  if("IntersectionObserver" in window){
-    const ahead=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){eager(e.target);ahead.unobserve(e.target);}}),{rootMargin:"2000px 0px"});
-    lazy.forEach(img=>ahead.observe(img));
-  }
-  document.querySelectorAll('nav.years a[href^="#y"]').forEach(a=>a.addEventListener("click",()=>{
-    const sec=document.querySelector(a.getAttribute("href"));
-    if(sec) sec.querySelectorAll("img").forEach(eager);
-  }));
+  const ahead=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){eager(e.target);ahead.unobserve(e.target);}}),{rootMargin:"1500px 0px"});
+  document.querySelectorAll('img[loading="lazy"]').forEach(img=>ahead.observe(img));
+
+  /* Tap a year: jump straight there, with the year bar left alone while the page moves. */
+  links.forEach(a=>{
+    const id=a.getAttribute("href").slice(1);
+    const sec=document.getElementById(id);
+    if(!sec) return;
+    a.addEventListener("click",e=>{
+      e.preventDefault();
+      sec.querySelectorAll("img").forEach(eager);
+      setOn(id);
+      jumping=true;
+      clearTimeout(jumpTimer);
+      const t0=Date.now();
+      let idle=0;
+      // "Scroll has stopped" = no scroll events for 150ms (works in Safari, which lacks scrollend).
+      const onScroll=()=>{clearTimeout(idle);idle=setTimeout(done,150);};
+      function done(){
+        if(Date.now()-t0<250) return;               // ignore a swipe that was already ending
+        removeEventListener("scroll",onScroll);
+        clearTimeout(jumpTimer);
+        if(!jumping) return;
+        jumping=false;
+        // If a leftover swipe pushed us off the year, settle exactly on it.
+        const off=sec.getBoundingClientRect().top-(nav.offsetHeight+8);
+        if(Math.abs(off)>24) scrollBy({top:off,behavior:"auto"});
+        setOn(id);
+      }
+      addEventListener("scroll",onScroll,{passive:true});
+      jumpTimer=setTimeout(()=>{removeEventListener("scroll",onScroll);jumping=false;},2500);
+      const y=sec.getBoundingClientRect().top+scrollY-nav.offsetHeight-8;
+      scrollTo({top:Math.max(0,y),behavior:reduce?"auto":"smooth"});
+      history.replaceState(null,"","#"+id);
+    });
+  });
 
   /* Tap a photo to view it large */
   const imgs=[...document.querySelectorAll("img[data-i]")];

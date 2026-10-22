@@ -5,7 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
-<title>B.B.B.B 50 · Brad’s Big Birthday Bash · RSVP</title>
+<title>INVITATION · Brad’s Big Birthday Bash</title>
+<meta name="description" content="Saturday 21 November, 2pm to 6pm. Wentworth Bar, Sofitel Sydney Wentworth.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bbbb50.brad-wright.com/">
+<meta property="og:title" content="INVITATION · Brad’s Big Birthday Bash">
+<meta property="og:description" content="Saturday 21 November, 2pm to 6pm. Wentworth Bar, Sofitel Sydney Wentworth.">
+<meta property="og:image" content="https://bbbb50.brad-wright.com/assets/bbbb50-still.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="498">
+<meta property="og:image:alt" content="B.B.B.B Fifty">
+<script>
+  /* Intro: show the paint-on once per visit. Skip it for reduced motion,
+     for links straight to a section (#rsvp), and after it has been seen. */
+  (function () {
+    var seen = false;
+    try { seen = sessionStorage.getItem("bbbb50-intro") === "1"; } catch (e) {}
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!seen && !reduce && !location.hash) document.documentElement.classList.add("has-intro");
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -15,8 +34,9 @@
     --paper: #FFFDFD;
     --paper-soft: rgba(255, 253, 253, 0.66);
     --paper-faint: rgba(255, 253, 253, 0.16);
-    --crusta: #FD7B33;      /* swap for the v1.2 design-system value if it differs */
-    --razzmatazz: #E30B5C;  /* swap for the v1.2 design-system value if it differs */
+    --crusta: #FF7E2C;      /* v1.2 design system */
+    --razzmatazz: #F42168;  /* v1.2 design system */
+    --turquoise: #71E6E8;   /* v1.2 design system, dark backgrounds only */
     --font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
     color-scheme: dark;
     box-sizing: border-box;
@@ -40,8 +60,16 @@
   /* Hero */
   .hero { padding: clamp(3rem, 10vw, 6rem) 0 2.5rem; text-align: center; }
   .hero img { width: 100%; height: auto; display: block; }
+  .hero .kicker {
+    margin: 2rem 0 0.6rem;
+    color: var(--crusta);
+    font-weight: 600;
+    font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+    letter-spacing: 0.45em;
+    padding-left: 0.45em;
+  }
   .hero h1 {
-    margin: 2rem 0 0.5rem;
+    margin: 0 0 0.5rem;
     font-weight: 500;
     font-size: clamp(0.8rem, 2.6vw, 1rem);
     letter-spacing: 0.38em;
@@ -157,8 +185,25 @@
 
   /* Done state */
   .done { padding: 1rem 0 4rem; }
-  .done h2 { font-weight: 300; font-size: clamp(2.25rem, 9vw, 3.25rem); line-height: 1.1; margin: 0 0 1rem; }
-  .done h2 b { font-weight: 600; color: var(--crusta); }
+  .done h2 { font-weight: 400; font-size: clamp(1.6rem, 6vw, 2.1rem); line-height: 1.2; margin: 0 0 1rem; color: var(--turquoise); }
+  .done h2 b { font-weight: 500; }
+  .back-btn {
+    display: inline-block;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--paper-soft);
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--crusta);
+    text-underline-offset: 0.25em;
+  }
+  .back-btn:hover { color: var(--paper); }
+  .done .change { color: var(--paper-soft); font-size: 0.95rem; margin-top: 1.5rem; }
   .done p { margin: 0 0 1rem; }
   .diet-note { color: var(--paper-soft); }
   .diet-note a { color: var(--paper); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
@@ -192,15 +237,54 @@
     .party-count.bump { animation: bump 220ms ease-out; }
     @keyframes bump { 50% { transform: scale(1.18); } }
   }
+
+  /* Hero loop */
+  .hero-loop { width: 100%; height: auto; display: block; background: var(--black); }
+
+  /* Intro: paint-on, then the invitation */
+  .intro { display: none; }
+  html.has-intro { overflow: hidden; }
+  html.has-intro .intro {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.5rem, 3vh, 1.5rem);
+    padding: 1.5rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    background: var(--black);
+    cursor: pointer;
+    transition: opacity 700ms ease;
+  }
+  .intro.is-leaving { opacity: 0; pointer-events: none; }
+  .intro-kicker {
+    margin: 0;
+    color: var(--crusta);
+    font-weight: 600;
+    font-size: clamp(0.85rem, 3.2vw, 1.1rem);
+    letter-spacing: 0.55em;
+    padding-left: 0.55em;
+    opacity: 0;
+    animation: intro-in 900ms ease 300ms forwards;
+  }
+  .intro video { width: min(100%, 34rem, 62vh); height: auto; display: block; background: var(--black); }
+  @keyframes intro-in { to { opacity: 1; } }
 </style>
 </head>
 <body>
 
+<div class="intro" id="intro" role="dialog" aria-label="B.B.B.B 50 invitation">
+  <p class="intro-kicker">INVITATION</p>
+  <video id="intro-video" muted playsinline preload="auto" src="assets/bbbb50-sweep-sq.mp4" width="720" height="720" aria-label="The B.B.B.B Fifty logo being painted on"></video>
+</div>
+
 <header class="hero">
   <div class="wrap">
-    <img src="assets/bbbb-mark.png" width="896" height="353" alt="B.B.B.B Fifty">
+    <video class="hero-loop" id="hero-loop" muted loop playsinline preload="auto" poster="assets/bbbb50-still.jpg" width="1280" height="498" src="assets/bbbb50-shimmer.mp4" role="img" aria-label="B.B.B.B Fifty"></video>
+    <p class="kicker">INVITATION</p>
     <h1>Brad’s Big Birthday Bash</h1>
-    <p>Saturday 21 November 2026 · Sydney</p>
   </div>
 </header>
 
@@ -210,23 +294,27 @@
       <dl>
         <div>
           <dt>When</dt>
-          <dd>Saturday 21 November, 2pm to 7pm<small>Drop in, drop out. Off to a gig that night? You’re done by 7.</small></dd>
+          <dd>Saturday 21 November<small>2:00pm to 6:00pm</small></dd>
         </div>
         <div>
           <dt>Where</dt>
-          <dd>Wentworth Bar, Level 5<small>Sofitel Sydney Wentworth, 61–101 Phillip St</small></dd>
+          <dd>Wentworth Bar<small>Sofitel Sydney Wentworth<br>Level 5, 61–101 Phillip St, Sydney</small></dd>
+        </div>
+        <div class="wide">
+          <dt>About the venue</dt>
+          <dd>A newly refurbished terrace bar, up on level 5.<small>Located within the historic Sofitel Sydney Wentworth, Sydney’s first international hotel.</small></dd>
         </div>
         <div>
           <dt>What’s on</dt>
-          <dd>First rounds on Brad from 2pm<small>Platters at 3pm. Happy hour from 4pm.</small></dd>
+          <dd>Bar tab from 2pm until it runs out.<small>Snacks from 3pm. Happy hour from 4pm.<br>Off to a gig that night? You’re out by 6pm at the latest.</small></dd>
         </div>
         <div>
           <dt>Dress code</dt>
-          <dd>Fancy beer garden vibes<small>Think sunny terrace and garden party. Not fancy dress.</small></dd>
+          <dd>Garden party vibes.<small>The Wentworth Bar has covered areas, so we’re on rain or shine.</small></dd>
         </div>
         <div class="wide">
           <dt>Getting there</dt>
-          <dd>Martin Place station is a short walk.<small>The bar has covered areas, so it’s on rain or shine.</small></dd>
+          <dd>Martin Place train station is a short walk. The Metro is across the road.<small>Plenty of CBD bus routes. Paid parking close by.</small></dd>
         </div>
       </dl>
     </div>
@@ -234,14 +322,14 @@
 
   <section class="memories" aria-label="Twenty years of B.B.B.B">
     <div class="wrap">
-      <a class="mem-link" href="memories.html"><span>Twenty years of B.B.B.B</span><small>Scroll back through every bash since 2006 and find yourself. <b>See the memories →</b></small></a>
+      <a class="mem-link" href="memories.html"><span>Twenty years of birthdays</span><small>Scroll back through the birthdays from 2006. <b>See the memories →</b></small></a>
     </div>
   </section>
 
   <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
     <div class="wrap">
-      <h2 id="rsvp-title">Are you in?</h2>
-      <p class="lede">Please RSVP by Tuesday 10 November. Plans changed? Fill this in again with the same mobile or email, and it updates your reply.</p>
+      <h2 id="rsvp-title">RSVP</h2>
+      <p class="lede">Please RSVP by Friday 13 November.</p>
 
       <form id="rsvp-form" novalidate>
         <div class="field">
@@ -250,17 +338,17 @@
         </div>
 
         <div class="field">
-          <label for="mobile">Mobile <span class="hint">Add a mobile, an email, or both, so Brad can reach you.</span></label>
+          <label for="mobile">Mobile</label>
           <input id="mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" maxlength="20">
         </div>
 
         <div class="field">
-          <label for="email">Email <span class="hint">Share your email if you’d like a calendar invite sent straight away.</span></label>
+          <label for="email">Email <span class="hint">The details and a calendar invite land here.</span></label>
           <input id="email" name="email" type="email" autocomplete="email" maxlength="120">
         </div>
 
         <fieldset class="field" id="attending-field">
-          <legend>Are you coming?</legend>
+          <legend>RSVP?</legend>
           <div class="choices">
             <label class="choice"><input type="radio" name="attending" value="Yes" required><span>Yes</span></label>
             <label class="choice"><input type="radio" name="attending" value="Maybe"><span>Maybe</span></label>
@@ -284,14 +372,12 @@
           <fieldset class="field">
             <legend>Roughly when will you arrive?</legend>
             <div class="choices">
-              <label class="choice"><input type="radio" name="arrival" value="2–4pm"><span>2–4pm</span></label>
-              <label class="choice"><input type="radio" name="arrival" value="4–5pm"><span>4–5pm</span></label>
-              <label class="choice"><input type="radio" name="arrival" value="5–7pm"><span>5–7pm</span></label>
+              <label class="choice"><input type="radio" name="arrival" value="2–3pm"><span>2–3pm</span></label>
+              <label class="choice"><input type="radio" name="arrival" value="3–4pm"><span>3–4pm</span></label>
+              <label class="choice"><input type="radio" name="arrival" value="4–6pm"><span>4–6pm</span></label>
               <label class="choice"><input type="radio" name="arrival" value="Not sure"><span>Not sure</span></label>
             </div>
           </fieldset>
-
-          <p class="field diet-note">Dietary needs or allergies? <a href="mailto:bbbb50@brad-wright.com?subject=Dietary%20needs%20for%20B.B.B.B%2050">Email Brad</a> so he can sort the platters.</p>
         </div>
 
         <div class="field">
@@ -306,17 +392,19 @@
 
         <button class="send" type="submit" id="send">Send my RSVP</button>
         <p class="error is-hidden" id="form-error" role="alert"></p>
-        <p class="privacy"><b>How I use your details.</b> Your RSVP goes to a private Google Sheet only Brad can see. It’s used to plan the party and send you updates about it. Nothing else. It won’t be shared or added to any list. The list is deleted by 31 January 2027. Want it gone sooner? Email <a href="mailto:bbbb50@brad-wright.com">bbbb50@brad-wright.com</a>.</p>
+        <p class="privacy"><b>Data disclaimer.</b> Your RSVP goes to a private Google Sheet only Brad can see. It’s used to plan the party and send you updates about it. Nothing else. It won’t be shared or added to any list. The list will be deleted by 1 December 2026. Want it gone sooner? Email <a href="mailto:bbbb50@brad-wright.com">bbbb50@brad-wright.com</a>.</p>
       </form>
     </div>
   </section>
 
   <section class="done is-hidden" id="done" aria-live="polite" tabindex="-1">
     <div class="wrap">
+      <button type="button" class="back-btn" id="back">← Back to the invitation</button>
       <h2 id="done-title"></h2>
       <p id="done-body"></p>
-      <p id="done-where">Wentworth Bar, Level 5, Sofitel Sydney Wentworth, 61–101 Phillip St, Sydney. Saturday 21 November, 2pm to 7pm.</p>
-      <div class="cal-links"><a class="ghost" id="add-cal" href="BBBB50.ics">Add to calendar</a> <a class="ghost" id="add-gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=B.B.B.B%2050%20%E2%80%93%20Brad%E2%80%99s%20Big%20Birthday%20Bash&dates=20261121T030000Z/20261121T080000Z&details=Drop%20in%20from%202pm.%20Platters%20at%203pm.%20Happy%20hour%20from%204pm.%20https%3A//bbbb50.brad-wright.com&location=Wentworth%20Bar%2C%20Level%205%2C%20Sofitel%20Sydney%20Wentworth%2C%2061%E2%80%93101%20Phillip%20St%2C%20Sydney%20NSW%202000" target="_blank" rel="noopener">Google Calendar</a></div>
+      <p id="done-where">Wentworth Bar, Level 5, Sofitel Sydney Wentworth, 61–101 Phillip St, Sydney. Saturday 21 November, 2pm to 6pm.</p>
+      <div class="cal-links"><a class="ghost" id="add-cal" href="BBBB50.ics">Add to calendar</a> <a class="ghost" id="add-gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=B.B.B.B%2050%20%E2%80%93%20Brad%E2%80%99s%20Big%20Birthday%20Bash&dates=20261121T030000Z/20261121T070000Z&details=Bar%20tab%20from%202pm.%20Snacks%20from%203pm.%20Happy%20hour%20from%204pm.%20Garden%20party%20vibes.%20https%3A//bbbb50.brad-wright.com&location=Wentworth%20Bar%2C%20Level%205%2C%20Sofitel%20Sydney%20Wentworth%2C%2061%E2%80%93101%20Phillip%20St%2C%20Sydney%20NSW%202000" target="_blank" rel="noopener">Google Calendar</a></div>
+      <p class="change">Plans change? RSVP again with the same mobile or email, and it updates your reply.</p>
     </div>
   </section>
 </main>
@@ -330,6 +418,44 @@
   // Paste the Apps Script web app URL here (ends in /exec).
   const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzY_YGrq125QML7GPaNM6XXAENKaf2xvvha5TsucUMzqFYTuMjxE1szlVegQvaMo3v8Pw/exec";
   const MAX_GUESTS = 6;
+
+  /* ---------- Intro and hero loop ---------- */
+  const heroLoop = document.getElementById("hero-loop");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function startHero() {
+    if (reduceMotion) return;                       // reduced motion: the still logo stays
+    heroLoop.muted = true;
+    heroLoop.play().catch(() => {
+      // Some phones block it until the first touch or scroll: start it then.
+      const kick = () => heroLoop.play().catch(() => {});
+      ["touchstart", "click", "scroll"].forEach((ev) => addEventListener(ev, kick, { once: true, passive: true }));
+    });
+  }
+
+  (function intro() {
+    const root = document.documentElement;
+    const box = document.getElementById("intro");
+    const vid = document.getElementById("intro-video");
+    if (!root.classList.contains("has-intro")) { vid.removeAttribute("src"); vid.load(); startHero(); return; }
+
+    let done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      try { sessionStorage.setItem("bbbb50-intro", "1"); } catch (e) {}
+      vid.pause();
+      startHero();
+      box.classList.add("is-leaving");
+      setTimeout(() => { root.classList.remove("has-intro"); box.remove(); }, 700);
+    }
+    box.addEventListener("click", finish);
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" || e.key === "Enter") finish(); });
+    vid.addEventListener("ended", () => setTimeout(finish, 900));   // hold on the final frame, then open
+    vid.addEventListener("error", finish);                           // clip can't load: go straight in
+    if (vid.error) finish();                                         // it failed before this script ran
+    vid.play().catch(() => { vid.poster = "assets/bbbb50-still.jpg"; setTimeout(finish, 2500); });   // autoplay blocked (e.g. Low Power Mode): show the logo, then open
+    setTimeout(finish, 20000);                                       // safety net on a very slow connection
+  })();
 
   /* ---------- "Me +" counter ---------- */
   const form = document.getElementById("rsvp-form");
@@ -436,7 +562,7 @@
     title.textContent = "";
     if (attending === "No") {
       title.append(`Thanks, ${first}.`);
-      body.textContent = "Brad will miss you. Change your mind? Come back and RSVP again with the same mobile or email.";
+      body.textContent = "Brad will miss you.";
       cal.classList.add("is-hidden");
       gcal.classList.add("is-hidden");
       where.classList.add("is-hidden");
@@ -456,6 +582,20 @@
     done.focus();
     done.scrollIntoView({ block: "start" });
   }
+
+
+  /* ---------- Back to the invitation ---------- */
+  document.getElementById("back").addEventListener("click", () => {
+    document.getElementById("done").classList.add("is-hidden");
+    ["add-cal", "add-gcal", "done-where"].forEach((id) => document.getElementById(id).classList.remove("is-hidden"));
+    form.reset();
+    setGuests(0);
+    comingBlock.classList.remove("is-hidden");
+    sendBtn.disabled = false;
+    sendBtn.textContent = "Send my RSVP";
+    document.getElementById("rsvp").classList.remove("is-hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
 </script>
 </body>

@@ -5,11 +5,12 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:bbbb50-20261121@bbbb-50
-DTSTAMP:20261022T000000Z
+DTSTAMP:20261022T090000Z
+SEQUENCE:1
 DTSTART:20261121T030000Z
-DTEND:20261121T080000Z
+DTEND:20261121T070000Z
 SUMMARY:B.B.B.B 50 – Brad’s Big Birthday Bash
 LOCATION:Wentworth Bar\, Level 5\, Sofitel Sydney Wentworth\, 61–101 Phillip St\, Sydney NSW 2000
-DESCRIPTION:Drop in from 2pm. Platters at 3pm. Happy hour from 4pm. Dress code: fancy beer garden vibes. https://bbbb50.brad-wright.com
+DESCRIPTION:Bar tab from 2pm. Snacks from 3pm. Happy hour from 4pm. Dress code: garden party vibes. https://bbbb50.brad-wright.com
 END:VEVENT
 END:VCALENDAR

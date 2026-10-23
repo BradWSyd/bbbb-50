@@ -11,310 +11,291 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black:#000000; --paper:#FFFDFD; --paper-soft:rgba(255,253,253,.66); --paper-faint:rgba(255,253,253,.16);
-    --crusta:#FF7E2C; --razzmatazz:#F42168;
-    --font:"Montserrat","Helvetica Neue",Arial,sans-serif;
-    color-scheme:dark; box-sizing:border-box;
+    --black: #000000;
+    --paper: #FFFDFD;
+    --paper-soft: rgba(255, 253, 253, 0.66);
+    --paper-faint: rgba(255, 253, 253, 0.16);
+    --placeholder: rgba(255, 253, 253, 0.06);
+    --crusta: #FF7E2C;
+    --razzmatazz: #F42168;
+    --font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    color-scheme: dark;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  *,*::before,*::after{box-sizing:inherit}
-  html{background:var(--black);scroll-padding-top:4.5rem}
-  html,body{overflow-x:clip}
-    body{margin:0;background:var(--black);color:var(--paper);font-family:var(--font);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
-  .wrap{width:min(100% - 2rem,64rem);margin-inline:auto}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  a{color:var(--paper);text-underline-offset:.2em;text-decoration-color:var(--crusta)}
-  .top{padding:max(1rem,env(safe-area-inset-top)) 0 0}
-  .back{font-size:.9rem;color:var(--paper-soft)}
-  .hero{text-align:center;padding:2.5rem 0 2rem}
-  .hero img{width:min(100%,36rem);height:auto}
-  .hero h1{margin:1.75rem 0 .5rem;font-weight:500;font-size:clamp(.8rem,2.6vw,1rem);letter-spacing:.38em;text-transform:uppercase;padding-left:.38em}
-  .hero p{margin:0 auto;max-width:30rem;color:var(--paper-soft)}
-  nav.years{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.94);border-block:1px solid var(--paper-faint)}
-  nav.years .wrap{display:flex;align-items:center;gap:.6rem;padding:.7rem 0}
-  nav.years .chips{position:relative;display:flex;gap:.4rem;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;min-width:0;flex:1}
-  nav.years .chips::-webkit-scrollbar{display:none}
-  nav.years a.home{background:var(--crusta);color:var(--black);border-color:var(--crusta);font-weight:600}
-  nav.years a{flex:none;text-decoration:none;font-weight:500;font-size:.9rem;padding:.35rem .8rem;border:1px solid var(--paper-faint);border-radius:999px;font-variant-numeric:tabular-nums}
-  nav.years a.on{background:var(--paper);color:var(--black);border-color:var(--paper)}
-  nav.years a.now{border-color:var(--crusta);color:var(--crusta)}
-  .year{padding:3.5rem 0 1rem}
-  .year-head{margin-bottom:1.5rem}
-  .num{margin:0;font-weight:300;font-size:clamp(4rem,18vw,8rem);line-height:.9;color:var(--crusta);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .year h2{margin:.6rem 0 .2rem;font-weight:500;font-size:clamp(.85rem,2.8vw,1.05rem);letter-spacing:.3em;text-transform:uppercase}
-  .sub{margin:0;color:var(--paper-soft)}
-  figure{margin:0}
-  .invites{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:.75rem}
-  .invites figure{flex:0 1 auto;max-width:100%}
-  .invites img{width:auto;max-width:100%;height:auto;max-height:min(70vh,34rem);display:block;border-radius:6px;border:1px solid var(--paper-faint);cursor:zoom-in}
-  .grid{columns:2;column-gap:.6rem}
-  @media (min-width:48rem){.grid{columns:3;column-gap:.75rem}}
-  .tile{break-inside:avoid;margin-bottom:.6rem}
-  .tile img,.tile video{width:100%;height:auto;display:block;border-radius:4px;background:#111}
-  .tile img{cursor:zoom-in}
-  .missing{border-top:1px solid var(--paper-faint);margin-top:3rem;padding:2.5rem 0}
-  .missing h2{font-weight:600;color:var(--crusta);font-size:.95rem;margin:0 0 .4rem}
-  .missing p{margin:0;color:var(--paper-soft)}
-  .missing .takedown{margin-top:1.75rem}
-  .missing a{color:var(--paper);text-underline-offset:.2em;text-decoration-color:var(--crusta);overflow-wrap:anywhere}
-  .finale{text-align:center;padding:3rem 0 4rem;border-top:1px solid var(--paper-faint)}
-  .finale .num{color:var(--razzmatazz)}
-  .finale h2{letter-spacing:normal;text-transform:none;font-weight:300;font-size:clamp(2rem,8vw,2.75rem);line-height:1.1;margin:.75rem 0 1.5rem}
-  .cta{display:inline-block;padding:1rem 2rem;border-radius:999px;background:var(--crusta);color:var(--black);font-weight:600;text-decoration:none}
-  footer{border-top:1px solid var(--paper-faint);padding:1.5rem 0 2.5rem;color:var(--paper-soft);font-size:.85rem}
-  dialog{border:0;padding:0;background:rgba(0,0,0,.95);max-width:100vw;max-height:100vh;width:100vw;height:100dvh;color:var(--paper)}
-  dialog::backdrop{background:rgba(0,0,0,.95)}
-  .lb{position:relative;width:100%;height:100%;display:grid;place-items:center}
-  .lb img{max-width:96vw;max-height:84dvh;object-fit:contain;border-radius:4px}
-  .lb button{position:absolute;background:rgba(0,0,0,.5);color:var(--paper);border:1px solid var(--paper-faint);border-radius:999px;width:3rem;height:3rem;font:inherit;font-size:1.4rem;cursor:pointer}
-  .lb .x{top:max(1rem,env(safe-area-inset-top));right:1rem}
-  .lb .prev{left:.75rem;top:50%;transform:translateY(-50%)}
-  .lb .next{right:.75rem;top:50%;transform:translateY(-50%)}
-  .lb .cap{position:absolute;bottom:max(1rem,env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:var(--paper-soft);font-size:.9rem}
+  *, *::before, *::after { box-sizing: inherit; }
+  html { background: var(--black); }
+  html, body { overflow-x: clip; }
+  body {
+    margin: 0; background: var(--black); color: var(--paper);
+    font-family: var(--font); font-size: 1.0625rem; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: min(100% - 2.5rem, 44rem); margin-inline: auto; }
+  a { color: var(--paper); text-underline-offset: .2em; text-decoration-color: var(--crusta); }
+  :focus-visible { outline: 2px solid var(--crusta); outline-offset: 3px; }
+
+  .top { padding: 1rem 0 0; }
+  .back { font-size: .9rem; color: var(--paper-soft); }
+
+  /* Hero: logo, title, then the venues as one flowing line split by the logo's orange dots */
+  .hero { text-align: center; padding: 2rem 0 2.75rem; }
+  .hero video, .hero .logo { width: min(100%, 36rem); height: auto; display: block; margin: 0 auto; background: var(--black); }
+  .hero h1 {
+    margin: 1.75rem 0 .6rem; font-weight: 500; font-size: clamp(.8rem, 2.6vw, 1rem);
+    letter-spacing: .38em; text-transform: uppercase; padding-left: .38em;
+  }
+  .lead { margin: 0 auto; max-width: 30rem; color: var(--paper-soft); }
+  .venues {
+    list-style: none; margin: 2rem auto 0; padding: 0; max-width: 40rem;
+    font-weight: 300; font-size: clamp(1.15rem, 4.8vw, 2rem); line-height: 1.45;
+    text-wrap: balance;
+  }
+  .venues li { display: inline; white-space: nowrap; }  /* venue names never split across lines */
+  .venues li:not(:last-child)::after {   /* dot rides with the name before it, so no line starts with a dot */
+    content: ""; display: inline-block; width: .26em; height: .26em; border-radius: 50%;
+    background: var(--crusta); margin-left: .42em; vertical-align: .2em;
+  }
+  .venues li + li { margin-left: .2em; }
+  .venues li:last-child { font-weight: 500; }
+  .venues li:nth-last-child(2)::after { background: var(--razzmatazz); }
+
+  /* The wall: same-size square tiles that read left to right.
+     Invite graphics take a full row so their text isn't cropped. */
+  .wall {
+    display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: dense;
+    gap: 3px; width: min(100%, 76rem); margin: 0 auto;
+  }
+  @media (min-width: 40rem) { .wall { grid-template-columns: repeat(4, 1fr); gap: 4px; padding-inline: 1rem; } }
+  @media (min-width: 64rem) { .wall { grid-template-columns: repeat(5, 1fr); } }
+  .tile {
+    position: relative; display: block; padding: 0; border: 0; margin: 0; cursor: zoom-in;
+    aspect-ratio: 1; overflow: hidden; background: var(--placeholder); border-radius: 2px;
+  }
+  .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tile.wide {
+    grid-column: 1 / -1; aspect-ratio: auto; background: var(--black);
+    padding: 1.25rem 0; display: flex; justify-content: center;
+  }
+  .tile.wide img { width: auto; height: auto; max-width: min(100% - 1.5rem, 46rem); max-height: min(60vh, 30rem); border-radius: 4px; }
+  .tile.vid { cursor: pointer; }
+  .play {
+    position: absolute; inset: 50% auto auto 50%; width: 3rem; height: 3rem; transform: translate(-50%, -50%);
+    border-radius: 50%; background: rgba(0, 0, 0, .55); border: 1px solid var(--paper-soft);
+  }
+  .play::after {
+    content: ""; position: absolute; left: 54%; top: 50%; transform: translate(-50%, -50%);
+    border-style: solid; border-width: .5rem 0 .5rem .8rem; border-color: transparent transparent transparent var(--paper);
+  }
+
+  .notes { padding: 3.5rem 0 1rem; color: var(--paper-soft); font-size: .95rem; }
+  .notes p { margin: 0 0 1rem; }
+  .notes a { overflow-wrap: anywhere; }
+
+  .finale { text-align: center; padding: 2rem 0 4rem; border-top: 1px solid var(--paper-faint); margin-top: 2rem; }
+  .finale video, .finale img { width: min(100%, 26rem); height: auto; display: block; margin: 0 auto; background: var(--black); }
+  .finale h2 { font-weight: 300; font-size: clamp(1.9rem, 8vw, 2.6rem); line-height: 1.1; margin: .5rem 0 1.5rem; }
+  .cta {
+    display: inline-block; padding: 1rem 2rem; border-radius: 999px; background: var(--crusta);
+    color: var(--black); font-weight: 600; text-decoration: none;
+  }
+  footer { border-top: 1px solid var(--paper-faint); padding: 1.5rem 0 2.5rem; color: var(--paper-soft); font-size: .85rem; }
+
+  /* Lightbox */
+  dialog {
+    border: 0; padding: 0; background: rgba(0, 0, 0, .96); color: var(--paper);
+    width: 100vw; height: 100dvh; max-width: 100vw; max-height: 100dvh;
+  }
+  dialog::backdrop { background: rgba(0, 0, 0, .96); }
+  .lb { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+  .lb img, .lb video { max-width: 96vw; max-height: 82dvh; object-fit: contain; border-radius: 4px; }
+  .lb button {
+    position: absolute; background: rgba(0, 0, 0, .5); color: var(--paper); border: 1px solid var(--paper-faint);
+    border-radius: 999px; width: 3rem; height: 3rem; font: inherit; font-size: 1.4rem; cursor: pointer;
+  }
+  .lb .x { top: max(1rem, env(safe-area-inset-top)); right: 1rem; }
+  .lb .prev { left: .75rem; top: 50%; transform: translateY(-50%); }
+  .lb .next { right: .75rem; top: 50%; transform: translateY(-50%); }
+  .lb .count {
+    position: absolute; bottom: max(1rem, env(safe-area-inset-bottom)); left: 0; right: 0;
+    margin: 0; text-align: center; color: var(--paper-soft); font-size: .85rem; font-variant-numeric: tabular-nums;
+  }
 </style>
 </head>
 <body>
-<div class="top"><div class="wrap"><a class="back" href="index.html">← B.B.B.B 50 · Invitation</a></div></div>
+<div class="top"><div class="wrap"><a class="back" href="index.html">← B.B.B.B 50 invitation</a></div></div>
+
 <header class="hero">
   <div class="wrap">
-    <img src="assets/bbbb50-still.jpg" width="1280" height="498" alt="B.B.B.B Fifty">
-    <h1>Twenty years of bashes</h1>
-    <p>From Circular Quay in 2006 to RÜFÜS DU SOL in 2025. Scroll back through the years and find yourself.</p>
+    <video id="hero-loop" muted loop playsinline preload="auto" poster="assets/bbbb50-still.jpg" width="1280" height="498" src="assets/bbbb50-shimmer.mp4" role="img" aria-label="B.B.B.B Fifty"></video>
+    <h1>Twenty years of B.B.B.B</h1>
+    <p class="lead">2006 to 2026. One party a year, a lot of good memories.</p>
+    <ul class="venues" aria-label="Venues over the years"><li>Watersedge</li> <li>Slide</li> <li>Dolphin Hotel</li> <li>The Beresford</li> <li>Arq</li> <li>Port Douglas</li> <li>Monopole</li> <li>The Bourbon</li> <li>W Melbourne</li> <li>Brown Alley</li> <li>Park Hyatt</li> <li>The Establishment</li> <li>Ivy</li> <li>Wentworth Bar</li></ul>
   </div>
 </header>
-<nav class="years" aria-label="Jump to a year"><div class="wrap"><a class="home" href="index.html#rsvp">← RSVP</a><div class="chips"><a href="#y1976">1976</a><a href="#y2006">2006</a><a href="#y2007">2007</a><a href="#y2009">2009</a><a href="#y2010">2010</a><a href="#y2011">2011</a><a href="#y2013">2013</a><a href="#y2014">2014</a><a href="#y2015">2015</a><a href="#y2016">2016</a><a href="#y2017">2017</a><a href="#y2019">2019</a><a href="#y2020">2020</a><a href="#y2021">2021</a><a href="#y2022">2022</a><a href="#y2023">2023</a><a href="#y2024">2024</a><a href="#y2025">2025</a><a href="#y2026" class="now">2026</a></div></div></nav>
+
 <main>
-<section class="year" id="y1976" aria-labelledby="t1976">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">1976</p><h2 id="t1976"><span class="sr">1976: </span>Where it all began</h2><p class="sub">All original parts.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/1976-01.webp" data-full="assets/years/1976-01.webp" width="720" height="960" alt="B.B.B.B 1976, photo" loading="lazy" decoding="async" data-i="0"></figure></div>
+  <div class="wall" aria-label="72 photos and videos from past bashes">
+    <button class="tile" type="button" data-i="0" data-full="assets/years/2006-01.webp" aria-label="Open photo 1"><img src="assets/years/thumbs/2006-01.webp" width="336" height="448" alt="Photo from a past B.B.B.B" loading="eager" fetchpriority="high" decoding="async"></button>
+    <button class="tile" type="button" data-i="1" data-full="assets/years/2006-02.webp" aria-label="Open photo 2"><img src="assets/years/thumbs/2006-02.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" fetchpriority="high" decoding="async"></button>
+    <button class="tile" type="button" data-i="2" data-full="assets/years/2006-03.webp" aria-label="Open photo 3"><img src="assets/years/thumbs/2006-03.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" fetchpriority="high" decoding="async"></button>
+    <button class="tile" type="button" data-i="3" data-full="assets/years/2006-04.webp" aria-label="Open photo 4"><img src="assets/years/thumbs/2006-04.webp" width="614" height="460" alt="Photo from a past B.B.B.B" loading="eager" decoding="async"></button>
+    <button class="tile" type="button" data-i="4" data-full="assets/years/2006-05.webp" aria-label="Open photo 5"><img src="assets/years/thumbs/2006-05.webp" width="460" height="614" alt="Photo from a past B.B.B.B" loading="eager" decoding="async"></button>
+    <button class="tile" type="button" data-i="5" data-full="assets/years/2006-06.webp" aria-label="Open photo 6"><img src="assets/years/thumbs/2006-06.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" decoding="async"></button>
+    <button class="tile" type="button" data-i="6" data-full="assets/years/2006-07.webp" aria-label="Open photo 7"><img src="assets/years/thumbs/2006-07.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" decoding="async"></button>
+    <button class="tile" type="button" data-i="7" data-full="assets/years/2006-08.webp" aria-label="Open photo 8"><img src="assets/years/thumbs/2006-08.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" decoding="async"></button>
+    <button class="tile" type="button" data-i="8" data-full="assets/years/2006-09.webp" aria-label="Open photo 9"><img src="assets/years/thumbs/2006-09.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" decoding="async"></button>
+    <button class="tile" type="button" data-i="9" data-full="assets/years/2006-10.webp" aria-label="Open photo 10"><img src="assets/years/thumbs/2006-10.webp" width="336" height="448" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="10" data-full="assets/years/2006-11.webp" aria-label="Open photo 11"><img src="assets/years/thumbs/2006-11.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="11" data-full="assets/years/2006-12.webp" aria-label="Open photo 12"><img src="assets/years/thumbs/2006-12.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="12" data-full="assets/years/2006-13.webp" aria-label="Open photo 13"><img src="assets/years/thumbs/2006-13.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="13" data-full="assets/years/2010-01.webp" aria-label="Open photo 14"><img src="assets/years/thumbs/2010-01.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="14" data-full="assets/years/2010-02.webp" aria-label="Open photo 15"><img src="assets/years/thumbs/2010-02.webp" width="453" height="604" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="15" data-full="assets/years/2010-03.webp" aria-label="Open photo 16"><img src="assets/years/thumbs/2010-03.webp" width="453" height="604" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="16" data-full="assets/years/2010-04.webp" aria-label="Open photo 17"><img src="assets/years/thumbs/2010-04.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="17" data-full="assets/years/2011-01.webp" aria-label="Open photo 18"><img src="assets/years/thumbs/2011-01.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="18" data-full="assets/years/2011-02.webp" aria-label="Open photo 19"><img src="assets/years/thumbs/2011-02.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="19" data-full="assets/years/2011-03.webp" aria-label="Open photo 20"><img src="assets/years/thumbs/2011-03.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="20" data-full="assets/years/2011-04.webp" aria-label="Open photo 21"><img src="assets/years/thumbs/2011-04.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="21" data-full="assets/years/2011-05.webp" aria-label="Open photo 22"><img src="assets/years/thumbs/2011-05.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile wide" type="button" data-i="22" data-full="assets/years/2013-01.webp" aria-label="Open photo 23"><img src="assets/years/thumbs/2013-01.webp" width="640" height="234" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile wide" type="button" data-i="23" data-full="assets/years/2013-02.webp" aria-label="Open photo 24"><img src="assets/years/thumbs/2013-02.webp" width="640" height="234" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="24" data-full="assets/years/2013-03.webp" aria-label="Open photo 25"><img src="assets/years/thumbs/2013-03.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="25" data-full="assets/years/2013-04.webp" aria-label="Open photo 26"><img src="assets/years/thumbs/2013-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="26" data-full="assets/years/2013-05.webp" aria-label="Open photo 27"><img src="assets/years/thumbs/2013-05.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="27" data-full="assets/years/2013-06.webp" aria-label="Open photo 28"><img src="assets/years/thumbs/2013-06.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="28" data-full="assets/years/2013-07.webp" aria-label="Open photo 29"><img src="assets/years/thumbs/2013-07.webp" width="540" height="720" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="29" data-full="assets/years/2013-08.webp" aria-label="Open photo 30"><img src="assets/years/thumbs/2013-08.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="30" data-full="assets/years/2013-09.webp" aria-label="Open photo 31"><img src="assets/years/thumbs/2013-09.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="31" data-full="assets/years/2013-10.webp" aria-label="Open photo 32"><img src="assets/years/thumbs/2013-10.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="32" data-full="assets/years/2013-11.webp" aria-label="Open photo 33"><img src="assets/years/thumbs/2013-11.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="33" data-full="assets/years/2014-01.webp" aria-label="Open photo 34"><img src="assets/years/thumbs/2014-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="34" data-full="assets/years/2014-02.webp" aria-label="Open photo 35"><img src="assets/years/thumbs/2014-02.webp" width="640" height="481" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="35" data-full="assets/years/2014-03.webp" aria-label="Open photo 36"><img src="assets/years/thumbs/2014-03.webp" width="640" height="481" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="36" data-full="assets/years/2015-01.webp" aria-label="Open photo 37"><img src="assets/years/thumbs/2015-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="37" data-full="assets/years/2015-02.webp" aria-label="Open photo 38"><img src="assets/years/thumbs/2015-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="38" data-full="assets/years/2015-03.webp" aria-label="Open photo 39"><img src="assets/years/thumbs/2015-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile wide" type="button" data-i="39" data-full="assets/years/2016-01.webp" aria-label="Open photo 40"><img src="assets/years/thumbs/2016-01.webp" width="640" height="508" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="40" data-full="assets/years/2016-02.webp" aria-label="Open photo 41"><img src="assets/years/thumbs/2016-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="41" data-full="assets/years/2016-03.webp" aria-label="Open photo 42"><img src="assets/years/thumbs/2016-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="42" data-full="assets/years/2016-04.webp" aria-label="Open photo 43"><img src="assets/years/thumbs/2016-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="43" data-full="assets/years/2016-05.webp" aria-label="Open photo 44"><img src="assets/years/thumbs/2016-05.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="44" data-full="assets/years/2016-06.webp" aria-label="Open photo 45"><img src="assets/years/thumbs/2016-06.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="45" data-full="assets/years/2016-07.webp" aria-label="Open photo 46"><img src="assets/years/thumbs/2016-07.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="46" data-full="assets/years/2016-08.webp" aria-label="Open photo 47"><img src="assets/years/thumbs/2016-08.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="47" data-full="assets/years/2017-01.webp" aria-label="Open photo 48"><img src="assets/years/thumbs/2017-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="48" data-full="assets/years/2017-02.webp" aria-label="Open photo 49"><img src="assets/years/thumbs/2017-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="49" data-full="assets/years/2019-01.webp" aria-label="Open photo 50"><img src="assets/years/thumbs/2019-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile wide" type="button" data-i="50" data-full="assets/years/2020-01.webp" aria-label="Open photo 51"><img src="assets/years/thumbs/2020-01.webp" width="640" height="244" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="51" data-full="assets/years/2020-03.webp" aria-label="Open photo 52"><img src="assets/years/thumbs/2020-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile wide" type="button" data-i="52" data-full="assets/years/2021-01.webp" aria-label="Open photo 53"><img src="assets/years/thumbs/2021-01.webp" width="640" height="361" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="53" data-full="assets/years/2021-02.webp" aria-label="Open photo 54"><img src="assets/years/thumbs/2021-02.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="54" data-full="assets/years/2021-03.webp" aria-label="Open photo 55"><img src="assets/years/thumbs/2021-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="55" data-full="assets/years/2021-04.webp" aria-label="Open photo 56"><img src="assets/years/thumbs/2021-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="56" data-full="assets/years/2021-05.webp" aria-label="Open photo 57"><img src="assets/years/thumbs/2021-05.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="57" data-full="assets/years/2022-01.webp" aria-label="Open photo 58"><img src="assets/years/thumbs/2022-01.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="58" data-full="assets/years/2022-02.webp" aria-label="Open photo 59"><img src="assets/years/thumbs/2022-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="59" data-full="assets/years/2022-03.webp" aria-label="Open photo 60"><img src="assets/years/thumbs/2022-03.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="60" data-full="assets/years/2022-04.webp" aria-label="Open photo 61"><img src="assets/years/thumbs/2022-04.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="61" data-full="assets/years/2022-05.webp" aria-label="Open photo 62"><img src="assets/years/thumbs/2022-05.webp" width="640" height="361" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="62" data-full="assets/years/2022-06.webp" aria-label="Open photo 63"><img src="assets/years/thumbs/2022-06.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="63" data-full="assets/years/2023-01.webp" aria-label="Open photo 64"><img src="assets/years/thumbs/2023-01.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="64" data-full="assets/years/2023-02.webp" aria-label="Open photo 65"><img src="assets/years/thumbs/2023-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="65" data-full="assets/years/2023-03.webp" aria-label="Open photo 66"><img src="assets/years/thumbs/2023-03.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="66" data-full="assets/years/2024-02.webp" aria-label="Open photo 67"><img src="assets/years/thumbs/2024-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid" type="button" data-i="67" data-video="assets/years/2024-ivy.mp4" data-poster="assets/years/2024-ivy.jpg" aria-label="Play video: Troy’s 40th at IVY"><img src="assets/years/thumbs/2024-ivy.webp" width="360" height="640" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile" type="button" data-i="68" data-full="assets/years/2025-01.webp" aria-label="Open photo 69"><img src="assets/years/thumbs/2025-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="69" data-full="assets/years/2025-02.webp" aria-label="Open photo 70"><img src="assets/years/thumbs/2025-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="70" data-full="assets/years/2025-03.webp" aria-label="Open photo 71"><img src="assets/years/thumbs/2025-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="71" data-full="assets/years/2025-04.webp" aria-label="Open photo 72"><img src="assets/years/thumbs/2025-04.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
   </div>
-</section>
-<section class="year" id="y2006" aria-labelledby="t2006">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2006</p><h2 id="t2006"><span class="sr">2006: </span>BB30BB</h2><p class="sub">The 30th. Lunch on Sydney Harbour, then a takeover of Slide.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2006-01.webp" data-full="assets/years/2006-01.webp" width="336" height="448" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="1"></figure><figure class="tile"><img src="assets/years/thumbs/2006-02.webp" data-full="assets/years/2006-02.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="2"></figure><figure class="tile"><img src="assets/years/thumbs/2006-03.webp" data-full="assets/years/2006-03.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="3"></figure><figure class="tile"><img src="assets/years/thumbs/2006-04.webp" data-full="assets/years/2006-04.webp" width="614" height="460" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="4"></figure><figure class="tile"><img src="assets/years/thumbs/2006-05.webp" data-full="assets/years/2006-05.webp" width="460" height="614" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="5"></figure><figure class="tile"><img src="assets/years/thumbs/2006-06.webp" data-full="assets/years/2006-06.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="6"></figure><figure class="tile"><img src="assets/years/thumbs/2006-07.webp" data-full="assets/years/2006-07.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="7"></figure><figure class="tile"><img src="assets/years/thumbs/2006-08.webp" data-full="assets/years/2006-08.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="8"></figure><figure class="tile"><img src="assets/years/thumbs/2006-09.webp" data-full="assets/years/2006-09.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="9"></figure><figure class="tile"><img src="assets/years/thumbs/2006-10.webp" data-full="assets/years/2006-10.webp" width="336" height="448" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="10"></figure><figure class="tile"><img src="assets/years/thumbs/2006-11.webp" data-full="assets/years/2006-11.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="11"></figure><figure class="tile"><img src="assets/years/thumbs/2006-12.webp" data-full="assets/years/2006-12.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="12"></figure><figure class="tile"><img src="assets/years/thumbs/2006-13.webp" data-full="assets/years/2006-13.webp" width="448" height="336" alt="B.B.B.B 2006, photo" loading="lazy" decoding="async" data-i="13"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2007" aria-labelledby="t2007">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2007</p><h2 id="t2007"><span class="sr">2007: </span>Slide</h2><p class="sub">Back to Oxford St for round two.</p></header>
-    <div class='invites'><figure class="invite"><img src="assets/years/thumbs/2007-01.webp" data-full="assets/years/2007-01.webp" width="776" height="1400" alt="B.B.B.B 2007 invitation" loading="lazy" decoding="async" data-i="14"></figure></div>
-    
-  </div>
-</section>
-<section class="year" id="y2009" aria-labelledby="t2009">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2009</p><h2 id="t2009"><span class="sr">2009: </span>Dolphin Hotel</h2><p class="sub">Brad, James and Adam’s birthday weekend.</p></header>
-    <div class='invites'><figure class="invite"><img src="assets/years/thumbs/2009-01.webp" data-full="assets/years/2009-01.webp" width="776" height="1400" alt="B.B.B.B 2009 invitation" loading="lazy" decoding="async" data-i="15"></figure></div>
-    
-  </div>
-</section>
-<section class="year" id="y2010" aria-labelledby="t2010">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2010</p><h2 id="t2010"><span class="sr">2010: </span>B.B.B.B ’10</h2><p class="sub">The Beresford and Arq.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2010-01.webp" data-full="assets/years/2010-01.webp" width="604" height="453" alt="B.B.B.B 2010, photo" loading="lazy" decoding="async" data-i="16"></figure><figure class="tile"><img src="assets/years/thumbs/2010-02.webp" data-full="assets/years/2010-02.webp" width="453" height="604" alt="B.B.B.B 2010, photo" loading="lazy" decoding="async" data-i="17"></figure><figure class="tile"><img src="assets/years/thumbs/2010-03.webp" data-full="assets/years/2010-03.webp" width="453" height="604" alt="B.B.B.B 2010, photo" loading="lazy" decoding="async" data-i="18"></figure><figure class="tile"><img src="assets/years/thumbs/2010-04.webp" data-full="assets/years/2010-04.webp" width="604" height="453" alt="B.B.B.B 2010, photo" loading="lazy" decoding="async" data-i="19"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2011" aria-labelledby="t2011">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2011</p><h2 id="t2011"><span class="sr">2011: </span>The 35th</h2><p class="sub">A combined party with Jake, Shauna and Adam.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2011-01.webp" data-full="assets/years/2011-01.webp" width="604" height="453" alt="B.B.B.B 2011, photo" loading="lazy" decoding="async" data-i="20"></figure><figure class="tile"><img src="assets/years/thumbs/2011-02.webp" data-full="assets/years/2011-02.webp" width="604" height="453" alt="B.B.B.B 2011, photo" loading="lazy" decoding="async" data-i="21"></figure><figure class="tile"><img src="assets/years/thumbs/2011-03.webp" data-full="assets/years/2011-03.webp" width="604" height="453" alt="B.B.B.B 2011, photo" loading="lazy" decoding="async" data-i="22"></figure><figure class="tile"><img src="assets/years/thumbs/2011-04.webp" data-full="assets/years/2011-04.webp" width="604" height="453" alt="B.B.B.B 2011, photo" loading="lazy" decoding="async" data-i="23"></figure><figure class="tile"><img src="assets/years/thumbs/2011-05.webp" data-full="assets/years/2011-05.webp" width="604" height="453" alt="B.B.B.B 2011, photo" loading="lazy" decoding="async" data-i="24"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2013" aria-labelledby="t2013">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2013</p><h2 id="t2013"><span class="sr">2013: </span>The Beresford</h2><p class="sub">Sunday 24 November, 3pm till late.</p></header>
-    <div class='invites'><figure class="invite"><img src="assets/years/thumbs/2013-01.webp" data-full="assets/years/2013-01.webp" width="677" height="248" alt="B.B.B.B 2013 invitation" loading="lazy" decoding="async" data-i="25"></figure><figure class="invite"><img src="assets/years/thumbs/2013-02.webp" data-full="assets/years/2013-02.webp" width="677" height="248" alt="B.B.B.B 2013 invitation" loading="lazy" decoding="async" data-i="26"></figure></div>
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2013-03.webp" data-full="assets/years/2013-03.webp" width="1050" height="1400" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="27"></figure><figure class="tile"><img src="assets/years/thumbs/2013-04.webp" data-full="assets/years/2013-04.webp" width="1400" height="1050" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="28"></figure><figure class="tile"><img src="assets/years/thumbs/2013-05.webp" data-full="assets/years/2013-05.webp" width="1050" height="1400" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="29"></figure><figure class="tile"><img src="assets/years/thumbs/2013-06.webp" data-full="assets/years/2013-06.webp" width="1050" height="1400" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="30"></figure><figure class="tile"><img src="assets/years/thumbs/2013-07.webp" data-full="assets/years/2013-07.webp" width="540" height="720" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="31"></figure><figure class="tile"><img src="assets/years/thumbs/2013-08.webp" data-full="assets/years/2013-08.webp" width="1400" height="1050" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="32"></figure><figure class="tile"><img src="assets/years/thumbs/2013-09.webp" data-full="assets/years/2013-09.webp" width="1400" height="1050" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="33"></figure><figure class="tile"><img src="assets/years/thumbs/2013-10.webp" data-full="assets/years/2013-10.webp" width="1400" height="1050" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="34"></figure><figure class="tile"><img src="assets/years/thumbs/2013-11.webp" data-full="assets/years/2013-11.webp" width="1400" height="1050" alt="B.B.B.B 2013, photo" loading="lazy" decoding="async" data-i="35"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2014" aria-labelledby="t2014">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2014</p><h2 id="t2014"><span class="sr">2014: </span>IRH</h2></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2014-01.webp" data-full="assets/years/2014-01.webp" width="1280" height="960" alt="B.B.B.B 2014, photo" loading="lazy" decoding="async" data-i="36"></figure><figure class="tile"><img src="assets/years/thumbs/2014-02.webp" data-full="assets/years/2014-02.webp" width="852" height="640" alt="B.B.B.B 2014, photo" loading="lazy" decoding="async" data-i="37"></figure><figure class="tile"><img src="assets/years/thumbs/2014-03.webp" data-full="assets/years/2014-03.webp" width="852" height="640" alt="B.B.B.B 2014, photo" loading="lazy" decoding="async" data-i="38"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2015" aria-labelledby="t2015">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2015</p><h2 id="t2015"><span class="sr">2015: </span>Bowling</h2><p class="sub">Lawn bowls, done properly.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2015-01.webp" data-full="assets/years/2015-01.webp" width="1400" height="1050" alt="B.B.B.B 2015, photo" loading="lazy" decoding="async" data-i="39"></figure><figure class="tile"><img src="assets/years/thumbs/2015-02.webp" data-full="assets/years/2015-02.webp" width="1400" height="1050" alt="B.B.B.B 2015, photo" loading="lazy" decoding="async" data-i="40"></figure><figure class="tile"><img src="assets/years/thumbs/2015-03.webp" data-full="assets/years/2015-03.webp" width="960" height="720" alt="B.B.B.B 2015, photo" loading="lazy" decoding="async" data-i="41"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2016" aria-labelledby="t2016">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2016</p><h2 id="t2016"><span class="sr">2016: </span>The 40th</h2><p class="sub">Port Douglas, then the Beresford.</p></header>
-    <div class='invites'><figure class="invite"><img src="assets/years/thumbs/2016-01.webp" data-full="assets/years/2016-01.webp" width="214" height="170" alt="B.B.B.B 2016 invitation" loading="lazy" decoding="async" data-i="42"></figure></div>
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2016-02.webp" data-full="assets/years/2016-02.webp" width="1400" height="1050" alt="B.B.B.B 2016, photo" loading="lazy" decoding="async" data-i="43"></figure><figure class="tile"><img src="assets/years/thumbs/2016-03.webp" data-full="assets/years/2016-03.webp" width="1400" height="1050" alt="B.B.B.B 2016, photo" loading="lazy" decoding="async" data-i="44"></figure><figure class="tile"><img src="assets/years/thumbs/2016-04.webp" data-full="assets/years/2016-04.webp" width="1280" height="960" alt="B.B.B.B 2016, photo" loading="lazy" decoding="async" data-i="45"></figure><figure class="tile"><img src="assets/years/thumbs/2016-05.webp" data-full="assets/years/2016-05.webp" width="1050" height="1400" alt="B.B.B.B 2016, photo" loading="lazy" decoding="async" data-i="46"></figure><figure class="tile"><img src="assets/years/thumbs/2016-06.webp" data-full="assets/years/2016-06.webp" width="960" height="720" alt="B.B.B.B 2016, photo" loading="lazy" decoding="async" data-i="47"></figure><figure class="tile"><img src="assets/years/thumbs/2016-07.webp" data-full="assets/years/2016-07.webp" width="720" height="960" alt="B.B.B.B 2016, photo" loading="lazy" decoding="async" data-i="48"></figure><figure class="tile"><img src="assets/years/thumbs/2016-08.webp" data-full="assets/years/2016-08.webp" width="960" height="720" alt="B.B.B.B 2016, photo" loading="lazy" decoding="async" data-i="49"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2017" aria-labelledby="t2017">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2017</p><h2 id="t2017"><span class="sr">2017: </span>Bump in</h2><p class="sub">Light rail on Devonshire St, then dinner at Monopole.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2017-01.webp" data-full="assets/years/2017-01.webp" width="1080" height="810" alt="B.B.B.B 2017, photo" loading="lazy" decoding="async" data-i="50"></figure><figure class="tile"><img src="assets/years/thumbs/2017-02.webp" data-full="assets/years/2017-02.webp" width="1080" height="810" alt="B.B.B.B 2017, photo" loading="lazy" decoding="async" data-i="51"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2019" aria-labelledby="t2019">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2019</p><h2 id="t2019"><span class="sr">2019: </span>Lunch with James</h2><p class="sub">Monopole.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2019-01.webp" data-full="assets/years/2019-01.webp" width="1400" height="1050" alt="B.B.B.B 2019, photo" loading="lazy" decoding="async" data-i="52"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2020" aria-labelledby="t2020">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2020</p><h2 id="t2020"><span class="sr">2020: </span>The COVID-Safe Edition</h2><p class="sub">The Bourbon, Potts Point. Numbers capped at 30.</p></header>
-    <div class='invites'><figure class="invite"><img src="assets/years/thumbs/2020-01.webp" data-full="assets/years/2020-01.webp" width="1400" height="533" alt="B.B.B.B 2020 invitation" loading="lazy" decoding="async" data-i="53"></figure><figure class="invite"><img src="assets/years/thumbs/2020-02.webp" data-full="assets/years/2020-02.webp" width="776" height="1400" alt="B.B.B.B 2020 invitation" loading="lazy" decoding="async" data-i="54"></figure></div>
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2020-03.webp" data-full="assets/years/2020-03.webp" width="1400" height="1050" alt="B.B.B.B 2020, photo" loading="lazy" decoding="async" data-i="55"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2021" aria-labelledby="t2021">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2021</p><h2 id="t2021"><span class="sr">2021: </span>BROY 1st Birthday</h2><p class="sub">The Bourbon, Potts Point.</p></header>
-    <div class='invites'><figure class="invite"><img src="assets/years/thumbs/2021-01.webp" data-full="assets/years/2021-01.webp" width="1400" height="789" alt="B.B.B.B 2021 invitation" loading="lazy" decoding="async" data-i="56"></figure></div>
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2021-02.webp" data-full="assets/years/2021-02.webp" width="1050" height="1400" alt="B.B.B.B 2021, photo" loading="lazy" decoding="async" data-i="57"></figure><figure class="tile"><img src="assets/years/thumbs/2021-03.webp" data-full="assets/years/2021-03.webp" width="960" height="720" alt="B.B.B.B 2021, photo" loading="lazy" decoding="async" data-i="58"></figure><figure class="tile"><img src="assets/years/thumbs/2021-04.webp" data-full="assets/years/2021-04.webp" width="1242" height="932" alt="B.B.B.B 2021, photo" loading="lazy" decoding="async" data-i="59"></figure><figure class="tile"><img src="assets/years/thumbs/2021-05.webp" data-full="assets/years/2021-05.webp" width="1242" height="932" alt="B.B.B.B 2021, photo" loading="lazy" decoding="async" data-i="60"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2022" aria-labelledby="t2022">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2022</p><h2 id="t2022"><span class="sr">2022: </span>BROY Melbourne</h2><p class="sub">Hot Since 82.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2022-01.webp" data-full="assets/years/2022-01.webp" width="1400" height="788" alt="B.B.B.B 2022, photo" loading="lazy" decoding="async" data-i="61"></figure><figure class="tile"><img src="assets/years/thumbs/2022-02.webp" data-full="assets/years/2022-02.webp" width="1400" height="787" alt="B.B.B.B 2022, photo" loading="lazy" decoding="async" data-i="62"></figure><figure class="tile"><img src="assets/years/thumbs/2022-03.webp" data-full="assets/years/2022-03.webp" width="1400" height="788" alt="B.B.B.B 2022, photo" loading="lazy" decoding="async" data-i="63"></figure><figure class="tile"><img src="assets/years/thumbs/2022-04.webp" data-full="assets/years/2022-04.webp" width="1400" height="788" alt="B.B.B.B 2022, photo" loading="lazy" decoding="async" data-i="64"></figure><figure class="tile"><img src="assets/years/thumbs/2022-05.webp" data-full="assets/years/2022-05.webp" width="1400" height="789" alt="B.B.B.B 2022, photo" loading="lazy" decoding="async" data-i="65"></figure><figure class="tile"><img src="assets/years/thumbs/2022-06.webp" data-full="assets/years/2022-06.webp" width="1400" height="788" alt="B.B.B.B 2022, photo" loading="lazy" decoding="async" data-i="66"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2023" aria-labelledby="t2023">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2023</p><h2 id="t2023"><span class="sr">2023: </span>BROY Park Hyatt</h2><p class="sub">Park Hyatt Sydney.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2023-01.webp" data-full="assets/years/2023-01.webp" width="1400" height="788" alt="B.B.B.B 2023, photo" loading="lazy" decoding="async" data-i="67"></figure><figure class="tile"><img src="assets/years/thumbs/2023-02.webp" data-full="assets/years/2023-02.webp" width="1400" height="788" alt="B.B.B.B 2023, photo" loading="lazy" decoding="async" data-i="68"></figure><figure class="tile"><img src="assets/years/thumbs/2023-03.webp" data-full="assets/years/2023-03.webp" width="1400" height="787" alt="B.B.B.B 2023, photo" loading="lazy" decoding="async" data-i="69"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2024" aria-labelledby="t2024">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2024</p><h2 id="t2024"><span class="sr">2024: </span>Troy’s 40th</h2><p class="sub">Gorgon City at IVY.</p></header>
-    
-    <div class='grid'><figure class="tile"><video src="assets/years/2024-ivy.mp4" poster="assets/years/2024-ivy.jpg" width="720" height="1280" controls playsinline preload="none"></video></figure><figure class="tile"><img src="assets/years/thumbs/2024-02.webp" data-full="assets/years/2024-02.webp" width="1280" height="720" alt="B.B.B.B 2024, photo" loading="lazy" decoding="async" data-i="70"></figure></div>
-  </div>
-</section>
-<section class="year" id="y2025" aria-labelledby="t2025">
-  <div class="wrap">
-    <header class="year-head"><p class="num" aria-hidden="true">2025</p><h2 id="t2025"><span class="sr">2025: </span>BROY</h2><p class="sub">Aunty Jo in Sydney, then RÜFÜS DU SOL.</p></header>
-    
-    <div class='grid'><figure class="tile"><img src="assets/years/thumbs/2025-01.webp" data-full="assets/years/2025-01.webp" width="1400" height="1050" alt="B.B.B.B 2025, photo" loading="lazy" decoding="async" data-i="71"></figure><figure class="tile"><img src="assets/years/thumbs/2025-02.webp" data-full="assets/years/2025-02.webp" width="1400" height="1049" alt="B.B.B.B 2025, photo" loading="lazy" decoding="async" data-i="72"></figure><figure class="tile"><img src="assets/years/thumbs/2025-03.webp" data-full="assets/years/2025-03.webp" width="1400" height="1050" alt="B.B.B.B 2025, photo" loading="lazy" decoding="async" data-i="73"></figure><figure class="tile"><img src="assets/years/thumbs/2025-04.webp" data-full="assets/years/2025-04.webp" width="1400" height="788" alt="B.B.B.B 2025, photo" loading="lazy" decoding="async" data-i="74"></figure></div>
-  </div>
-</section>
-  <section class="missing"><div class="wrap">
-    <h2>Missing years</h2>
-    <p>No photos yet from the 21st at the Lizard Lounge (1997), 2008, 2012 or 2018. Got some? Send them to Brad.</p>
-    <h2 class="takedown">Rather not be here?</h2>
-    <p>If there’s a photo of you you’d like taken down, email <a href="mailto:bbbb50@brad-wright.com?subject=Photo%20takedown">bbbb50@brad-wright.com</a>. It comes off, no questions asked.</p>
+
+  <section class="notes"><div class="wrap">
+    <p>Got photos from a bash that’s missing here? Send them to <a href="mailto:bbbb50@brad-wright.com?subject=B.B.B.B%20photos">bbbb50@brad-wright.com</a>.</p>
+    <p>Rather not be here? If there’s a photo of you you’d like taken down, email <a href="mailto:bbbb50@brad-wright.com?subject=Photo%20takedown">bbbb50@brad-wright.com</a>. It comes off, no questions asked.</p>
   </div></section>
-  <section class="finale year" id="y2026"><div class="wrap">
-    <p class="num" aria-hidden="true">2026</p>
+
+  <section class="finale" id="next"><div class="wrap">
+    <video id="finale-video" muted playsinline preload="metadata" poster="assets/bbbb50-sweep-end.jpg" width="720" height="720" src="assets/bbbb50-sweep-sq.mp4" role="img" aria-label="The B.B.B.B Fifty logo being painted on"></video>
     <h2>Next up: the big one.</h2>
     <a class="cta" href="index.html#rsvp">RSVP for B.B.B.B 50</a>
   </div></section>
 </main>
+
 <footer><div class="wrap"><a href="index.html">← Back to the invitation</a> · B.B.B.B 50. Fifty years in the making.</div></footer>
 
 <dialog id="lb" aria-label="Photo viewer">
   <div class="lb">
     <img id="lb-img" alt="">
-    <button class="x" id="lb-x" aria-label="Close">×</button>
-    <button class="prev" id="lb-prev" aria-label="Previous photo">‹</button>
-    <button class="next" id="lb-next" aria-label="Next photo">›</button>
-    <p class="cap" id="lb-cap"></p>
+    <video id="lb-vid" controls playsinline hidden></video>
+    <button class="x" id="lb-x" type="button" aria-label="Close">×</button>
+    <button class="prev" id="lb-prev" type="button" aria-label="Previous">‹</button>
+    <button class="next" id="lb-next" type="button" aria-label="Next">›</button>
+    <p class="count" id="lb-count" aria-live="polite"></p>
   </div>
 </dialog>
 
 <script>
-  /* Year bar: highlight the year on screen and keep its chip in view.
-     Only the chip row scrolls sideways; the page itself is never moved. */
-  const nav=document.querySelector("nav.years");
-  const chips=nav.querySelector(".chips");
-  const links=[...chips.querySelectorAll("a")];
-  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let current=null, jumping=false, jumpTimer=0;
-  function setOn(id){
-    if(id===current) return;
-    current=id;
-    let on=null;
-    links.forEach(a=>{const hit=a.getAttribute("href")==="#"+id; a.classList.toggle("on",hit); if(hit) on=a;});
-    if(on){
-      const left=on.offsetLeft-(chips.clientWidth-on.offsetWidth)/2;
-      chips.scrollTo({left:Math.max(0,left),behavior:reduce?"auto":"smooth"});
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Hero shimmer loops; reduced motion keeps the still logo. */
+  const hero = document.getElementById("hero-loop");
+  if (reduce) { hero.removeAttribute("src"); hero.load(); } else { hero.play().catch(() => {}); }
+
+  /* Finale paint-on plays once when it comes into view, then holds the last frame. */
+  const fin = document.getElementById("finale-video");
+  if (reduce) { fin.removeAttribute("src"); fin.load(); }
+  else new IntersectionObserver((es, o) => {
+    if (es[0].isIntersecting) { fin.play().catch(() => {}); o.disconnect(); }
+  }, { threshold: .5 }).observe(fin);
+
+  /* Load tiles well before they scroll into view, so a fast swipe doesn't land on empty squares. */
+  const ahead = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.loading = "eager"; ahead.unobserve(e.target); }
+  }), { rootMargin: "1800px 0px" });
+  document.querySelectorAll('.tile img[loading="lazy"]').forEach(img => ahead.observe(img));
+
+  /* Tap a tile to view it large. Swipe, arrows or keys to move through the whole wall. */
+  const tiles = [...document.querySelectorAll(".tile")];
+  const lb = document.getElementById("lb"), big = document.getElementById("lb-img"),
+        vid = document.getElementById("lb-vid"), count = document.getElementById("lb-count");
+  let cur = 0;
+  function warm(i) { const t = tiles[(i + tiles.length) % tiles.length]; if (t && t.dataset.full) new Image().src = t.dataset.full; }
+  function show(i) {
+    cur = (i + tiles.length) % tiles.length;
+    const t = tiles[cur];
+    vid.pause();
+    if (t.dataset.video) {
+      big.hidden = true; big.removeAttribute("src");
+      vid.hidden = false; vid.poster = t.dataset.poster; vid.src = t.dataset.video; vid.play().catch(() => {});
+    } else {
+      vid.hidden = true; vid.removeAttribute("src"); vid.load();
+      big.hidden = false; big.src = t.dataset.full; big.alt = t.querySelector("img").alt;
     }
+    count.textContent = (cur + 1) + " of " + tiles.length;
+    warm(cur + 1); warm(cur - 1);
   }
-  const io=new IntersectionObserver(es=>{
-    if(jumping) return;
-    es.forEach(e=>{if(e.isIntersecting) setOn(e.target.id);});
-  },{rootMargin:"-30% 0px -60% 0px"});
-  document.querySelectorAll("section.year").forEach(s=>io.observe(s));
-  // The last section is short, so light up 2026 once its RSVP button is fully on screen.
-  const cta=document.querySelector(".finale .cta");
-  if(cta) new IntersectionObserver(es=>{if(!jumping&&es[0].isIntersecting)setOn("y2026");},{threshold:1}).observe(cta);
-
-  /* Load photos well before they scroll into view, so a fast swipe on a phone
-     doesn't land on empty tiles. Tapping a year loads that year straight away. */
-  const eager=img=>{if(img.loading!=="eager")img.loading="eager";};
-  const ahead=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){eager(e.target);ahead.unobserve(e.target);}}),{rootMargin:"1500px 0px"});
-  document.querySelectorAll('img[loading="lazy"]').forEach(img=>ahead.observe(img));
-
-  /* Tap a year: jump straight there, with the year bar left alone while the page moves. */
-  links.forEach(a=>{
-    const id=a.getAttribute("href").slice(1);
-    const sec=document.getElementById(id);
-    if(!sec) return;
-    a.addEventListener("click",e=>{
-      e.preventDefault();
-      sec.querySelectorAll("img").forEach(eager);
-      setOn(id);
-      jumping=true;
-      clearTimeout(jumpTimer);
-      const t0=Date.now();
-      let idle=0;
-      // "Scroll has stopped" = no scroll events for 150ms (works in Safari, which lacks scrollend).
-      const onScroll=()=>{clearTimeout(idle);idle=setTimeout(done,150);};
-      function done(){
-        if(Date.now()-t0<250) return;               // ignore a swipe that was already ending
-        removeEventListener("scroll",onScroll);
-        clearTimeout(jumpTimer);
-        if(!jumping) return;
-        jumping=false;
-        // If a leftover swipe pushed us off the year, settle exactly on it.
-        const off=sec.getBoundingClientRect().top-(nav.offsetHeight+8);
-        if(Math.abs(off)>24) scrollBy({top:off,behavior:"auto"});
-        setOn(id);
-      }
-      addEventListener("scroll",onScroll,{passive:true});
-      jumpTimer=setTimeout(()=>{removeEventListener("scroll",onScroll);jumping=false;},2500);
-      const y=sec.getBoundingClientRect().top+scrollY-nav.offsetHeight-8;
-      scrollTo({top:Math.max(0,y),behavior:reduce?"auto":"smooth"});
-      history.replaceState(null,"","#"+id);
-    });
+  function close() { vid.pause(); lb.close(); }
+  tiles.forEach((t, i) => t.addEventListener("click", () => { show(i); lb.showModal(); }));
+  lb.addEventListener("close", () => { vid.pause(); tiles[cur].focus({ preventScroll: true }); });
+  document.getElementById("lb-x").onclick = close;
+  document.getElementById("lb-prev").onclick = () => show(cur - 1);
+  document.getElementById("lb-next").onclick = () => show(cur + 1);
+  lb.addEventListener("click", e => { if (e.target === lb || e.target.classList.contains("lb")) close(); });
+  document.addEventListener("keydown", e => {
+    if (!lb.open) return;
+    if (e.key === "ArrowRight") show(cur + 1);
+    if (e.key === "ArrowLeft") show(cur - 1);
   });
-
-  /* Tap a photo to view it large */
-  const imgs=[...document.querySelectorAll("img[data-i]")];
-  const lb=document.getElementById("lb"), big=document.getElementById("lb-img"), cap=document.getElementById("lb-cap");
-  let cur=0;
-  const full=im=>im.dataset.full||im.src;
-  function warm(i){const im=imgs[(i+imgs.length)%imgs.length];if(im){const p=new Image();p.src=full(im);}}
-  function show(i){cur=(i+imgs.length)%imgs.length;const im=imgs[cur];big.src=full(im);big.alt=im.alt;cap.textContent=im.closest("section").id.slice(1);warm(cur+1);warm(cur-1);}
-  imgs.forEach((im,i)=>im.addEventListener("click",()=>{show(i);lb.showModal();}));
-  document.getElementById("lb-x").onclick=()=>lb.close();
-  document.getElementById("lb-prev").onclick=()=>show(cur-1);
-  document.getElementById("lb-next").onclick=()=>show(cur+1);
-  lb.addEventListener("click",e=>{if(e.target===lb||e.target.classList.contains("lb"))lb.close();});
-  document.addEventListener("keydown",e=>{if(!lb.open)return;if(e.key==="ArrowRight")show(cur+1);if(e.key==="ArrowLeft")show(cur-1);});
-  let x0=null; lb.addEventListener("touchstart",e=>x0=e.touches[0].clientX,{passive:true});
-  lb.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(cur+(dx<0?1:-1));x0=null;});
+  let x0 = null;
+  lb.addEventListener("touchstart", e => { x0 = e.target === vid ? null : e.touches[0].clientX; }, { passive: true });  // let video scrubbing alone
+  lb.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
+    x0 = null;
+  });
 </script>
 </body>
 </html>

@@ -5,8 +5,9 @@ A one-page RSVP site on True Black. Replies land in a Google Sheet. Each guest g
 ## What's in here
 
 - `index.html` — the page: party details, RSVP form, "Me +" counter, confirmation screen
-- `memories.html` — "Twenty years of B.B.B.B": a year-by-year scroll of past bashes, linked from the RSVP page
+- `memories.html` — "Twenty years of B.B.B.B": one photo wall of past bashes (no years shown), venue line at the top, paint-on finale. Built by `make_memories.py` from `memories.template.html`
 - `assets/years/` — the memories photos, invites and the 2024 IVY clip, shrunk for phones (about 7MB)
+- `assets/bbbb50-shimmer.mp4`, `bbbb50-sweep-sq.mp4`, `bbbb50-still.jpg`, `bbbb50-sweep-end.jpg` — v3 colour-sweep logo: hero loop, paint-on, and their stills
 - `assets/bbbb-mark.png` — the brush-script B.B.B.B FIFTY mark on True Black
 - `apps-script/Code.gs` — the backend that logs rows and sends emails
 
@@ -30,3 +31,9 @@ A one-page RSVP site on True Black. Replies land in a Google Sheet. Each guest g
 - **Search engines.** The page tells Google not to index it, because it shows the address and guest details. A public mood board page, if you build one, should be a separate page.
 - **Colours.** Crusta and Razzmatazz use standard values. Swap them for your v1.2 design-system values at the top of the CSS.
 - **Spam.** A hidden field catches bots. Anything it catches is ignored.
+
+## Memories wall: how to change it
+
+1. Open `make_memories.py`. Edit `REMOVE` (codes to hide), `WIDE` (invite graphics shown full width) or `VENUES`.
+2. New photo? Add `assets/years/<year>-<nn>.webp` (1400px max) and `assets/years/thumbs/<year>-<nn>.webp` (640px max). Files sort by name, so the code sets its place.
+3. Run `python3 make_memories.py .` from the repo folder. It rewrites `memories.html`.

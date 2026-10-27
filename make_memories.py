@@ -8,12 +8,12 @@ REMOVE = {"1976-01", "2007-01", "2009-01", "2013-02", "2016-01", "2020-02"}  # b
 WIDE = {"2013-01", "2013-02", "2016-01", "2020-01", "2021-01"}  # invite graphics: full row, not cropped
 VIDEOS = {  # code: (mp4, label). Poster is assets/years/<code>.jpg, thumb is thumbs/<code>.webp
     "2013-v1": ("assets/years/2013-v1.mp4", "Video from a past B.B.B.B"),
-    "2014-v1": ("assets/years/2014-v1.mp4", "Video from a past B.B.B.B"),
     "2018-v1": ("assets/years/2018-v1.mp4", "Video from a past B.B.B.B"),
     "2018-v2": ("assets/years/2018-v2.mp4", "Video from a past B.B.B.B"),
     "2019-v1": ("assets/years/2019-v1.mp4", "Video from a past B.B.B.B"),
     "2022-v1": ("assets/years/2022-v1.mp4", "Video from a past B.B.B.B"),
     "2024-v1": ("assets/years/2024-v1.mp4", "Video from a past B.B.B.B"),
+    "2024-v2": ("assets/years/2024-v2.mp4", "Video from a past B.B.B.B"),
 }
 YOUTUBE = {  # code: (YouTube id, label). Plays in the page, no trip to YouTube
     "2025-yt": ("NfplQbyGHl4", "RÜFÜS DU SOL: The Best Birthday Concert Ever"),

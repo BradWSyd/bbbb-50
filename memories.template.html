@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
-<title>B.B.B.B · Twenty years of birthday bashes</title>
+<title>B.B.B.B · Twenty years of birthday memories</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -39,27 +39,13 @@
   .top { padding: 1rem 0 0; }
   .back { font-size: .9rem; color: var(--paper-soft); }
 
-  /* Hero: logo, title, then the venues as one flowing line split by the logo's orange dots */
-  .hero { text-align: center; padding: 2rem 0 2.75rem; }
+  /* Hero: logo, then one line of copy */
+  .hero { text-align: center; padding: 2rem 0 2.5rem; }
   .hero video, .hero .logo { width: min(100%, 36rem); height: auto; display: block; margin: 0 auto; background: var(--black); }
   .hero h1 {
-    margin: 1.75rem 0 .6rem; font-weight: 500; font-size: clamp(.8rem, 2.6vw, 1rem);
-    letter-spacing: .38em; text-transform: uppercase; padding-left: .38em;
+    margin: 1.75rem 0 0; font-weight: 500; font-size: clamp(.8rem, 2.6vw, 1rem);
+    letter-spacing: .38em; text-transform: uppercase; padding-left: .38em; text-wrap: balance;
   }
-  .lead { margin: 0 auto; max-width: 30rem; color: var(--paper-soft); }
-  .venues {
-    list-style: none; margin: 2rem auto 0; padding: 0; max-width: 40rem;
-    font-weight: 300; font-size: clamp(1.15rem, 4.8vw, 2rem); line-height: 1.45;
-    text-wrap: balance;
-  }
-  .venues li { display: inline; white-space: nowrap; }  /* venue names never split across lines */
-  .venues li:not(:last-child)::after {   /* dot rides with the name before it, so no line starts with a dot */
-    content: ""; display: inline-block; width: .26em; height: .26em; border-radius: 50%;
-    background: var(--crusta); margin-left: .42em; vertical-align: .2em;
-  }
-  .venues li + li { margin-left: .2em; }
-  .venues li:last-child { font-weight: 500; }
-  .venues li:nth-last-child(2)::after { background: var(--razzmatazz); }
 
   /* The wall: same-size square tiles that read left to right.
      Invite graphics take a full row so their text isn't cropped. */
@@ -80,6 +66,7 @@
   }
   .tile.wide img { width: auto; height: auto; max-width: min(100% - 1.5rem, 46rem); max-height: min(60vh, 30rem); border-radius: 4px; }
   .tile.vid { cursor: pointer; }
+  .tile.yt img.hq { transform: scale(1.34); }
   .play {
     position: absolute; inset: 50% auto auto 50%; width: 3rem; height: 3rem; transform: translate(-50%, -50%);
     border-radius: 50%; background: rgba(0, 0, 0, .55); border: 1px solid var(--paper-soft);
@@ -110,6 +97,7 @@
   dialog::backdrop { background: rgba(0, 0, 0, .96); }
   .lb { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
   .lb img, .lb video { max-width: 96vw; max-height: 82dvh; object-fit: contain; border-radius: 4px; }
+  .lb iframe { width: min(96vw, calc(82dvh * 16 / 9)); aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 4px; background: #000; }
   .lb button {
     position: absolute; background: rgba(0, 0, 0, .5); color: var(--paper); border: 1px solid var(--paper-faint);
     border-radius: 999px; width: 3rem; height: 3rem; font: inherit; font-size: 1.4rem; cursor: pointer;
@@ -129,9 +117,7 @@
 <header class="hero">
   <div class="wrap">
     <video id="hero-loop" muted loop playsinline preload="auto" poster="assets/bbbb50-still.jpg" width="1280" height="498" src="assets/bbbb50-shimmer.mp4" role="img" aria-label="B.B.B.B Fifty"></video>
-    <h1>Twenty years of B.B.B.B</h1>
-    <p class="lead">2006 to 2026. One party a year, a lot of good memories.</p>
-    <ul class="venues" aria-label="Venues over the years">{{VENUES}}</ul>
+    <h1>Twenty years of birthday memories</h1>
   </div>
 </header>
 
@@ -141,7 +127,6 @@
   </div>
 
   <section class="notes"><div class="wrap">
-    <p>Got photos from a bash that’s missing here? Send them to <a href="mailto:bbbb50@brad-wright.com?subject=B.B.B.B%20photos">bbbb50@brad-wright.com</a>.</p>
     <p>Rather not be here? If there’s a photo of you you’d like taken down, email <a href="mailto:bbbb50@brad-wright.com?subject=Photo%20takedown">bbbb50@brad-wright.com</a>. It comes off, no questions asked.</p>
   </div></section>
 
@@ -158,6 +143,7 @@
   <div class="lb">
     <img id="lb-img" alt="">
     <video id="lb-vid" controls playsinline hidden></video>
+    <div id="lb-yt" hidden></div>
     <button class="x" id="lb-x" type="button" aria-label="Close">×</button>
     <button class="prev" id="lb-prev" type="button" aria-label="Previous">‹</button>
     <button class="next" id="lb-next" type="button" aria-label="Next">›</button>
@@ -188,14 +174,27 @@
   /* Tap a tile to view it large. Swipe, arrows or keys to move through the whole wall. */
   const tiles = [...document.querySelectorAll(".tile")];
   const lb = document.getElementById("lb"), big = document.getElementById("lb-img"),
-        vid = document.getElementById("lb-vid"), count = document.getElementById("lb-count");
+        vid = document.getElementById("lb-vid"), yt = document.getElementById("lb-yt"),
+        count = document.getElementById("lb-count");
+  /* YouTube plays inside the viewer (privacy-enhanced embed). Clearing it stops playback. */
+  function stopYT() { yt.hidden = true; yt.replaceChildren(); }
+  function playYT(id) {
+    const f = document.createElement("iframe");
+    f.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
+    f.title = "YouTube video"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+    yt.replaceChildren(f); yt.hidden = false;
+  }
   let cur = 0;
   function warm(i) { const t = tiles[(i + tiles.length) % tiles.length]; if (t && t.dataset.full) new Image().src = t.dataset.full; }
   function show(i) {
     cur = (i + tiles.length) % tiles.length;
     const t = tiles[cur];
-    vid.pause();
-    if (t.dataset.video) {
+    vid.pause(); stopYT();
+    if (t.dataset.youtube) {
+      big.hidden = true; big.removeAttribute("src");
+      vid.hidden = true; vid.removeAttribute("src"); vid.load();
+      playYT(t.dataset.youtube);
+    } else if (t.dataset.video) {
       big.hidden = true; big.removeAttribute("src");
       vid.hidden = false; vid.poster = t.dataset.poster; vid.src = t.dataset.video; vid.play().catch(() => {});
     } else {
@@ -205,9 +204,9 @@
     count.textContent = (cur + 1) + " of " + tiles.length;
     warm(cur + 1); warm(cur - 1);
   }
-  function close() { vid.pause(); lb.close(); }
+  function close() { vid.pause(); stopYT(); lb.close(); }
   tiles.forEach((t, i) => t.addEventListener("click", () => { show(i); lb.showModal(); }));
-  lb.addEventListener("close", () => { vid.pause(); tiles[cur].focus({ preventScroll: true }); });
+  lb.addEventListener("close", () => { vid.pause(); stopYT(); tiles[cur].focus({ preventScroll: true }); });
   document.getElementById("lb-x").onclick = close;
   document.getElementById("lb-prev").onclick = () => show(cur - 1);
   document.getElementById("lb-next").onclick = () => show(cur + 1);

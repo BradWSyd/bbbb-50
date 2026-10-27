@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
-<title>B.B.B.B · Twenty years of birthday bashes</title>
+<title>B.B.B.B · Twenty years of birthday memories</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -39,27 +39,13 @@
   .top { padding: 1rem 0 0; }
   .back { font-size: .9rem; color: var(--paper-soft); }
 
-  /* Hero: logo, title, then the venues as one flowing line split by the logo's orange dots */
-  .hero { text-align: center; padding: 2rem 0 2.75rem; }
+  /* Hero: logo, then one line of copy */
+  .hero { text-align: center; padding: 2rem 0 2.5rem; }
   .hero video, .hero .logo { width: min(100%, 36rem); height: auto; display: block; margin: 0 auto; background: var(--black); }
   .hero h1 {
-    margin: 1.75rem 0 .6rem; font-weight: 500; font-size: clamp(.8rem, 2.6vw, 1rem);
-    letter-spacing: .38em; text-transform: uppercase; padding-left: .38em;
+    margin: 1.75rem 0 0; font-weight: 500; font-size: clamp(.8rem, 2.6vw, 1rem);
+    letter-spacing: .38em; text-transform: uppercase; padding-left: .38em; text-wrap: balance;
   }
-  .lead { margin: 0 auto; max-width: 30rem; color: var(--paper-soft); }
-  .venues {
-    list-style: none; margin: 2rem auto 0; padding: 0; max-width: 40rem;
-    font-weight: 300; font-size: clamp(1.15rem, 4.8vw, 2rem); line-height: 1.45;
-    text-wrap: balance;
-  }
-  .venues li { display: inline; white-space: nowrap; }  /* venue names never split across lines */
-  .venues li:not(:last-child)::after {   /* dot rides with the name before it, so no line starts with a dot */
-    content: ""; display: inline-block; width: .26em; height: .26em; border-radius: 50%;
-    background: var(--crusta); margin-left: .42em; vertical-align: .2em;
-  }
-  .venues li + li { margin-left: .2em; }
-  .venues li:last-child { font-weight: 500; }
-  .venues li:nth-last-child(2)::after { background: var(--razzmatazz); }
 
   /* The wall: same-size square tiles that read left to right.
      Invite graphics take a full row so their text isn't cropped. */
@@ -80,6 +66,7 @@
   }
   .tile.wide img { width: auto; height: auto; max-width: min(100% - 1.5rem, 46rem); max-height: min(60vh, 30rem); border-radius: 4px; }
   .tile.vid { cursor: pointer; }
+  .tile.yt img.hq { transform: scale(1.34); }
   .play {
     position: absolute; inset: 50% auto auto 50%; width: 3rem; height: 3rem; transform: translate(-50%, -50%);
     border-radius: 50%; background: rgba(0, 0, 0, .55); border: 1px solid var(--paper-soft);
@@ -110,6 +97,7 @@
   dialog::backdrop { background: rgba(0, 0, 0, .96); }
   .lb { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
   .lb img, .lb video { max-width: 96vw; max-height: 82dvh; object-fit: contain; border-radius: 4px; }
+  .lb iframe { width: min(96vw, calc(82dvh * 16 / 9)); aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 4px; background: #000; }
   .lb button {
     position: absolute; background: rgba(0, 0, 0, .5); color: var(--paper); border: 1px solid var(--paper-faint);
     border-radius: 999px; width: 3rem; height: 3rem; font: inherit; font-size: 1.4rem; cursor: pointer;
@@ -129,14 +117,12 @@
 <header class="hero">
   <div class="wrap">
     <video id="hero-loop" muted loop playsinline preload="auto" poster="assets/bbbb50-still.jpg" width="1280" height="498" src="assets/bbbb50-shimmer.mp4" role="img" aria-label="B.B.B.B Fifty"></video>
-    <h1>Twenty years of B.B.B.B</h1>
-    <p class="lead">2006 to 2026. One party a year, a lot of good memories.</p>
-    <ul class="venues" aria-label="Venues over the years"><li>Watersedge</li> <li>Slide</li> <li>Dolphin Hotel</li> <li>The Beresford</li> <li>Arq</li> <li>Port Douglas</li> <li>Monopole</li> <li>The Bourbon</li> <li>W Melbourne</li> <li>Brown Alley</li> <li>Park Hyatt</li> <li>The Establishment</li> <li>Ivy</li> <li>Wentworth Bar</li></ul>
+    <h1>Twenty years of birthday memories</h1>
   </div>
 </header>
 
 <main>
-  <div class="wall" aria-label="72 photos and videos from past bashes">
+  <div class="wall" aria-label="86 photos and videos from past bashes">
     <button class="tile" type="button" data-i="0" data-full="assets/years/2006-01.webp" aria-label="Open photo 1"><img src="assets/years/thumbs/2006-01.webp" width="336" height="448" alt="Photo from a past B.B.B.B" loading="eager" fetchpriority="high" decoding="async"></button>
     <button class="tile" type="button" data-i="1" data-full="assets/years/2006-02.webp" aria-label="Open photo 2"><img src="assets/years/thumbs/2006-02.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" fetchpriority="high" decoding="async"></button>
     <button class="tile" type="button" data-i="2" data-full="assets/years/2006-03.webp" aria-label="Open photo 3"><img src="assets/years/thumbs/2006-03.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="eager" fetchpriority="high" decoding="async"></button>
@@ -150,66 +136,82 @@
     <button class="tile" type="button" data-i="10" data-full="assets/years/2006-11.webp" aria-label="Open photo 11"><img src="assets/years/thumbs/2006-11.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
     <button class="tile" type="button" data-i="11" data-full="assets/years/2006-12.webp" aria-label="Open photo 12"><img src="assets/years/thumbs/2006-12.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
     <button class="tile" type="button" data-i="12" data-full="assets/years/2006-13.webp" aria-label="Open photo 13"><img src="assets/years/thumbs/2006-13.webp" width="448" height="336" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="13" data-full="assets/years/2010-01.webp" aria-label="Open photo 14"><img src="assets/years/thumbs/2010-01.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="14" data-full="assets/years/2010-02.webp" aria-label="Open photo 15"><img src="assets/years/thumbs/2010-02.webp" width="453" height="604" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="15" data-full="assets/years/2010-03.webp" aria-label="Open photo 16"><img src="assets/years/thumbs/2010-03.webp" width="453" height="604" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="16" data-full="assets/years/2010-04.webp" aria-label="Open photo 17"><img src="assets/years/thumbs/2010-04.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="17" data-full="assets/years/2011-01.webp" aria-label="Open photo 18"><img src="assets/years/thumbs/2011-01.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="18" data-full="assets/years/2011-02.webp" aria-label="Open photo 19"><img src="assets/years/thumbs/2011-02.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="19" data-full="assets/years/2011-03.webp" aria-label="Open photo 20"><img src="assets/years/thumbs/2011-03.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="20" data-full="assets/years/2011-04.webp" aria-label="Open photo 21"><img src="assets/years/thumbs/2011-04.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="21" data-full="assets/years/2011-05.webp" aria-label="Open photo 22"><img src="assets/years/thumbs/2011-05.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile wide" type="button" data-i="22" data-full="assets/years/2013-01.webp" aria-label="Open photo 23"><img src="assets/years/thumbs/2013-01.webp" width="640" height="234" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="23" data-full="assets/years/2013-03.webp" aria-label="Open photo 24"><img src="assets/years/thumbs/2013-03.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="24" data-full="assets/years/2013-04.webp" aria-label="Open photo 25"><img src="assets/years/thumbs/2013-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="25" data-full="assets/years/2013-05.webp" aria-label="Open photo 26"><img src="assets/years/thumbs/2013-05.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="26" data-full="assets/years/2013-06.webp" aria-label="Open photo 27"><img src="assets/years/thumbs/2013-06.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="27" data-full="assets/years/2013-07.webp" aria-label="Open photo 28"><img src="assets/years/thumbs/2013-07.webp" width="540" height="720" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="28" data-full="assets/years/2013-08.webp" aria-label="Open photo 29"><img src="assets/years/thumbs/2013-08.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="29" data-full="assets/years/2013-09.webp" aria-label="Open photo 30"><img src="assets/years/thumbs/2013-09.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="30" data-full="assets/years/2013-10.webp" aria-label="Open photo 31"><img src="assets/years/thumbs/2013-10.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="31" data-full="assets/years/2013-11.webp" aria-label="Open photo 32"><img src="assets/years/thumbs/2013-11.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="32" data-full="assets/years/2014-01.webp" aria-label="Open photo 33"><img src="assets/years/thumbs/2014-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="33" data-full="assets/years/2014-02.webp" aria-label="Open photo 34"><img src="assets/years/thumbs/2014-02.webp" width="640" height="481" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="34" data-full="assets/years/2014-03.webp" aria-label="Open photo 35"><img src="assets/years/thumbs/2014-03.webp" width="640" height="481" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="35" data-full="assets/years/2015-01.webp" aria-label="Open photo 36"><img src="assets/years/thumbs/2015-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="36" data-full="assets/years/2015-02.webp" aria-label="Open photo 37"><img src="assets/years/thumbs/2015-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="37" data-full="assets/years/2015-03.webp" aria-label="Open photo 38"><img src="assets/years/thumbs/2015-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="38" data-full="assets/years/2016-02.webp" aria-label="Open photo 39"><img src="assets/years/thumbs/2016-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="39" data-full="assets/years/2016-03.webp" aria-label="Open photo 40"><img src="assets/years/thumbs/2016-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="40" data-full="assets/years/2016-04.webp" aria-label="Open photo 41"><img src="assets/years/thumbs/2016-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="41" data-full="assets/years/2016-05.webp" aria-label="Open photo 42"><img src="assets/years/thumbs/2016-05.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="42" data-full="assets/years/2016-06.webp" aria-label="Open photo 43"><img src="assets/years/thumbs/2016-06.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="43" data-full="assets/years/2016-07.webp" aria-label="Open photo 44"><img src="assets/years/thumbs/2016-07.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="44" data-full="assets/years/2016-08.webp" aria-label="Open photo 45"><img src="assets/years/thumbs/2016-08.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="45" data-full="assets/years/2017-01.webp" aria-label="Open photo 46"><img src="assets/years/thumbs/2017-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="46" data-full="assets/years/2017-02.webp" aria-label="Open photo 47"><img src="assets/years/thumbs/2017-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="47" data-full="assets/years/2019-01.webp" aria-label="Open photo 48"><img src="assets/years/thumbs/2019-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile wide" type="button" data-i="48" data-full="assets/years/2020-01.webp" aria-label="Open photo 49"><img src="assets/years/thumbs/2020-01.webp" width="640" height="244" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="49" data-full="assets/years/2020-03.webp" aria-label="Open photo 50"><img src="assets/years/thumbs/2020-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile wide" type="button" data-i="50" data-full="assets/years/2021-01.webp" aria-label="Open photo 51"><img src="assets/years/thumbs/2021-01.webp" width="640" height="361" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="51" data-full="assets/years/2021-02.webp" aria-label="Open photo 52"><img src="assets/years/thumbs/2021-02.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="52" data-full="assets/years/2021-03.webp" aria-label="Open photo 53"><img src="assets/years/thumbs/2021-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="53" data-full="assets/years/2021-04.webp" aria-label="Open photo 54"><img src="assets/years/thumbs/2021-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="54" data-full="assets/years/2021-05.webp" aria-label="Open photo 55"><img src="assets/years/thumbs/2021-05.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="55" data-full="assets/years/2022-01.webp" aria-label="Open photo 56"><img src="assets/years/thumbs/2022-01.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="56" data-full="assets/years/2022-02.webp" aria-label="Open photo 57"><img src="assets/years/thumbs/2022-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="57" data-full="assets/years/2022-03.webp" aria-label="Open photo 58"><img src="assets/years/thumbs/2022-03.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="58" data-full="assets/years/2022-04.webp" aria-label="Open photo 59"><img src="assets/years/thumbs/2022-04.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="59" data-full="assets/years/2022-05.webp" aria-label="Open photo 60"><img src="assets/years/thumbs/2022-05.webp" width="640" height="361" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="60" data-full="assets/years/2022-06.webp" aria-label="Open photo 61"><img src="assets/years/thumbs/2022-06.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="61" data-full="assets/years/2023-01.webp" aria-label="Open photo 62"><img src="assets/years/thumbs/2023-01.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="62" data-full="assets/years/2023-02.webp" aria-label="Open photo 63"><img src="assets/years/thumbs/2023-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="63" data-full="assets/years/2023-03.webp" aria-label="Open photo 64"><img src="assets/years/thumbs/2023-03.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="64" data-full="assets/years/2024-02.webp" aria-label="Open photo 65"><img src="assets/years/thumbs/2024-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="65" data-full="assets/years/2025-01.webp" aria-label="Open photo 66"><img src="assets/years/thumbs/2025-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="66" data-full="assets/years/2025-02.webp" aria-label="Open photo 67"><img src="assets/years/thumbs/2025-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="67" data-full="assets/years/2025-03.webp" aria-label="Open photo 68"><img src="assets/years/thumbs/2025-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
-    <button class="tile" type="button" data-i="68" data-full="assets/years/2025-04.webp" aria-label="Open photo 69"><img src="assets/years/thumbs/2025-04.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="13" data-full="assets/years/2007-02.webp" aria-label="Open photo 14"><img src="assets/years/thumbs/2007-02.webp" width="500" height="333" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="14" data-full="assets/years/2010-01.webp" aria-label="Open photo 15"><img src="assets/years/thumbs/2010-01.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="15" data-full="assets/years/2010-02.webp" aria-label="Open photo 16"><img src="assets/years/thumbs/2010-02.webp" width="453" height="604" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="16" data-full="assets/years/2010-03.webp" aria-label="Open photo 17"><img src="assets/years/thumbs/2010-03.webp" width="453" height="604" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="17" data-full="assets/years/2010-04.webp" aria-label="Open photo 18"><img src="assets/years/thumbs/2010-04.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="18" data-full="assets/years/2011-01.webp" aria-label="Open photo 19"><img src="assets/years/thumbs/2011-01.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="19" data-full="assets/years/2011-02.webp" aria-label="Open photo 20"><img src="assets/years/thumbs/2011-02.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="20" data-full="assets/years/2011-03.webp" aria-label="Open photo 21"><img src="assets/years/thumbs/2011-03.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="21" data-full="assets/years/2011-04.webp" aria-label="Open photo 22"><img src="assets/years/thumbs/2011-04.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="22" data-full="assets/years/2011-05.webp" aria-label="Open photo 23"><img src="assets/years/thumbs/2011-05.webp" width="604" height="453" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile wide" type="button" data-i="23" data-full="assets/years/2013-01.webp" aria-label="Open photo 24"><img src="assets/years/thumbs/2013-01.webp" width="640" height="234" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="24" data-full="assets/years/2013-03.webp" aria-label="Open photo 25"><img src="assets/years/thumbs/2013-03.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="25" data-full="assets/years/2013-04.webp" aria-label="Open photo 26"><img src="assets/years/thumbs/2013-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="26" data-full="assets/years/2013-05.webp" aria-label="Open photo 27"><img src="assets/years/thumbs/2013-05.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="27" data-full="assets/years/2013-06.webp" aria-label="Open photo 28"><img src="assets/years/thumbs/2013-06.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="28" data-full="assets/years/2013-07.webp" aria-label="Open photo 29"><img src="assets/years/thumbs/2013-07.webp" width="540" height="720" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="29" data-full="assets/years/2013-08.webp" aria-label="Open photo 30"><img src="assets/years/thumbs/2013-08.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="30" data-full="assets/years/2013-09.webp" aria-label="Open photo 31"><img src="assets/years/thumbs/2013-09.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="31" data-full="assets/years/2013-10.webp" aria-label="Open photo 32"><img src="assets/years/thumbs/2013-10.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="32" data-full="assets/years/2013-11.webp" aria-label="Open photo 33"><img src="assets/years/thumbs/2013-11.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid" type="button" data-i="33" data-video="assets/years/2013-v1.mp4" data-poster="assets/years/2013-v1.jpg" aria-label="Play video: Video from a past B.B.B.B"><img src="assets/years/thumbs/2013-v1.webp" width="640" height="360" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile" type="button" data-i="34" data-full="assets/years/2014-01.webp" aria-label="Open photo 35"><img src="assets/years/thumbs/2014-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="35" data-full="assets/years/2014-02.webp" aria-label="Open photo 36"><img src="assets/years/thumbs/2014-02.webp" width="640" height="481" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="36" data-full="assets/years/2014-03.webp" aria-label="Open photo 37"><img src="assets/years/thumbs/2014-03.webp" width="640" height="481" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="37" data-full="assets/years/2014-04.webp" aria-label="Open photo 38"><img src="assets/years/thumbs/2014-04.webp" width="640" height="427" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid" type="button" data-i="38" data-video="assets/years/2014-v1.mp4" data-poster="assets/years/2014-v1.jpg" aria-label="Play video: Video from a past B.B.B.B"><img src="assets/years/thumbs/2014-v1.webp" width="360" height="640" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile" type="button" data-i="39" data-full="assets/years/2015-01.webp" aria-label="Open photo 40"><img src="assets/years/thumbs/2015-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="40" data-full="assets/years/2015-02.webp" aria-label="Open photo 41"><img src="assets/years/thumbs/2015-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="41" data-full="assets/years/2015-03.webp" aria-label="Open photo 42"><img src="assets/years/thumbs/2015-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="42" data-full="assets/years/2016-02.webp" aria-label="Open photo 43"><img src="assets/years/thumbs/2016-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="43" data-full="assets/years/2016-03.webp" aria-label="Open photo 44"><img src="assets/years/thumbs/2016-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="44" data-full="assets/years/2016-04.webp" aria-label="Open photo 45"><img src="assets/years/thumbs/2016-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="45" data-full="assets/years/2016-05.webp" aria-label="Open photo 46"><img src="assets/years/thumbs/2016-05.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="46" data-full="assets/years/2016-06.webp" aria-label="Open photo 47"><img src="assets/years/thumbs/2016-06.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="47" data-full="assets/years/2016-07.webp" aria-label="Open photo 48"><img src="assets/years/thumbs/2016-07.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="48" data-full="assets/years/2016-08.webp" aria-label="Open photo 49"><img src="assets/years/thumbs/2016-08.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="49" data-full="assets/years/2016-09.webp" aria-label="Open photo 50"><img src="assets/years/thumbs/2016-09.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="50" data-full="assets/years/2017-01.webp" aria-label="Open photo 51"><img src="assets/years/thumbs/2017-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="51" data-full="assets/years/2017-02.webp" aria-label="Open photo 52"><img src="assets/years/thumbs/2017-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid" type="button" data-i="52" data-video="assets/years/2018-v1.mp4" data-poster="assets/years/2018-v1.jpg" aria-label="Play video: Video from a past B.B.B.B"><img src="assets/years/thumbs/2018-v1.webp" width="640" height="360" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile vid" type="button" data-i="53" data-video="assets/years/2018-v2.mp4" data-poster="assets/years/2018-v2.jpg" aria-label="Play video: Video from a past B.B.B.B"><img src="assets/years/thumbs/2018-v2.webp" width="640" height="360" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile" type="button" data-i="54" data-full="assets/years/2019-01.webp" aria-label="Open photo 55"><img src="assets/years/thumbs/2019-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid" type="button" data-i="55" data-video="assets/years/2019-v1.mp4" data-poster="assets/years/2019-v1.jpg" aria-label="Play video: Video from a past B.B.B.B"><img src="assets/years/thumbs/2019-v1.webp" width="640" height="360" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile wide" type="button" data-i="56" data-full="assets/years/2020-01.webp" aria-label="Open photo 57"><img src="assets/years/thumbs/2020-01.webp" width="640" height="244" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="57" data-full="assets/years/2020-03.webp" aria-label="Open photo 58"><img src="assets/years/thumbs/2020-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="58" data-full="assets/years/2020-04.webp" aria-label="Open photo 59"><img src="assets/years/thumbs/2020-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="59" data-full="assets/years/2020-05.webp" aria-label="Open photo 60"><img src="assets/years/thumbs/2020-05.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="60" data-full="assets/years/2020-06.webp" aria-label="Open photo 61"><img src="assets/years/thumbs/2020-06.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile wide" type="button" data-i="61" data-full="assets/years/2021-01.webp" aria-label="Open photo 62"><img src="assets/years/thumbs/2021-01.webp" width="640" height="361" alt="Invitation from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="62" data-full="assets/years/2021-02.webp" aria-label="Open photo 63"><img src="assets/years/thumbs/2021-02.webp" width="640" height="853" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="63" data-full="assets/years/2021-03.webp" aria-label="Open photo 64"><img src="assets/years/thumbs/2021-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="64" data-full="assets/years/2021-04.webp" aria-label="Open photo 65"><img src="assets/years/thumbs/2021-04.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="65" data-full="assets/years/2021-05.webp" aria-label="Open photo 66"><img src="assets/years/thumbs/2021-05.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="66" data-full="assets/years/2022-01.webp" aria-label="Open photo 67"><img src="assets/years/thumbs/2022-01.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="67" data-full="assets/years/2022-02.webp" aria-label="Open photo 68"><img src="assets/years/thumbs/2022-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="68" data-full="assets/years/2022-03.webp" aria-label="Open photo 69"><img src="assets/years/thumbs/2022-03.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="69" data-full="assets/years/2022-04.webp" aria-label="Open photo 70"><img src="assets/years/thumbs/2022-04.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="70" data-full="assets/years/2022-05.webp" aria-label="Open photo 71"><img src="assets/years/thumbs/2022-05.webp" width="640" height="361" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="71" data-full="assets/years/2022-06.webp" aria-label="Open photo 72"><img src="assets/years/thumbs/2022-06.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid" type="button" data-i="72" data-video="assets/years/2022-v1.mp4" data-poster="assets/years/2022-v1.jpg" aria-label="Play video: Video from a past B.B.B.B"><img src="assets/years/thumbs/2022-v1.webp" width="640" height="360" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile" type="button" data-i="73" data-full="assets/years/2023-01.webp" aria-label="Open photo 74"><img src="assets/years/thumbs/2023-01.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="74" data-full="assets/years/2023-02.webp" aria-label="Open photo 75"><img src="assets/years/thumbs/2023-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="75" data-full="assets/years/2023-03.webp" aria-label="Open photo 76"><img src="assets/years/thumbs/2023-03.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="76" data-full="assets/years/2024-02.webp" aria-label="Open photo 77"><img src="assets/years/thumbs/2024-02.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid" type="button" data-i="77" data-video="assets/years/2024-v1.mp4" data-poster="assets/years/2024-v1.jpg" aria-label="Play video: Video from a past B.B.B.B"><img src="assets/years/thumbs/2024-v1.webp" width="640" height="360" alt="" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></button>
+    <button class="tile" type="button" data-i="78" data-full="assets/years/2025-01.webp" aria-label="Open photo 79"><img src="assets/years/thumbs/2025-01.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="79" data-full="assets/years/2025-02.webp" aria-label="Open photo 80"><img src="assets/years/thumbs/2025-02.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="80" data-full="assets/years/2025-03.webp" aria-label="Open photo 81"><img src="assets/years/thumbs/2025-03.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="81" data-full="assets/years/2025-04.webp" aria-label="Open photo 82"><img src="assets/years/thumbs/2025-04.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="82" data-full="assets/years/2025-05.webp" aria-label="Open photo 83"><img src="assets/years/thumbs/2025-05.webp" width="640" height="480" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="83" data-full="assets/years/2025-06.webp" aria-label="Open photo 84"><img src="assets/years/thumbs/2025-06.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile" type="button" data-i="84" data-full="assets/years/2025-07.webp" aria-label="Open photo 85"><img src="assets/years/thumbs/2025-07.webp" width="640" height="360" alt="Photo from a past B.B.B.B" loading="lazy" decoding="async"></button>
+    <button class="tile vid yt" type="button" data-i="85" data-youtube="NfplQbyGHl4" aria-label="Play video: RÜFÜS DU SOL: The Best Birthday Concert Ever"><img src="https://i.ytimg.com/vi/NfplQbyGHl4/maxresdefault.jpg" width="1280" height="720" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/NfplQbyGHl4/hqdefault.jpg';this.classList.add('hq')"><span class="play" aria-hidden="true"></span></button>
   </div>
 
   <section class="notes"><div class="wrap">
-    <p>Got photos from a bash that’s missing here? Send them to <a href="mailto:bbbb50@brad-wright.com?subject=B.B.B.B%20photos">bbbb50@brad-wright.com</a>.</p>
     <p>Rather not be here? If there’s a photo of you you’d like taken down, email <a href="mailto:bbbb50@brad-wright.com?subject=Photo%20takedown">bbbb50@brad-wright.com</a>. It comes off, no questions asked.</p>
   </div></section>
 
@@ -226,6 +228,7 @@
   <div class="lb">
     <img id="lb-img" alt="">
     <video id="lb-vid" controls playsinline hidden></video>
+    <div id="lb-yt" hidden></div>
     <button class="x" id="lb-x" type="button" aria-label="Close">×</button>
     <button class="prev" id="lb-prev" type="button" aria-label="Previous">‹</button>
     <button class="next" id="lb-next" type="button" aria-label="Next">›</button>
@@ -256,14 +259,27 @@
   /* Tap a tile to view it large. Swipe, arrows or keys to move through the whole wall. */
   const tiles = [...document.querySelectorAll(".tile")];
   const lb = document.getElementById("lb"), big = document.getElementById("lb-img"),
-        vid = document.getElementById("lb-vid"), count = document.getElementById("lb-count");
+        vid = document.getElementById("lb-vid"), yt = document.getElementById("lb-yt"),
+        count = document.getElementById("lb-count");
+  /* YouTube plays inside the viewer (privacy-enhanced embed). Clearing it stops playback. */
+  function stopYT() { yt.hidden = true; yt.replaceChildren(); }
+  function playYT(id) {
+    const f = document.createElement("iframe");
+    f.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
+    f.title = "YouTube video"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+    yt.replaceChildren(f); yt.hidden = false;
+  }
   let cur = 0;
   function warm(i) { const t = tiles[(i + tiles.length) % tiles.length]; if (t && t.dataset.full) new Image().src = t.dataset.full; }
   function show(i) {
     cur = (i + tiles.length) % tiles.length;
     const t = tiles[cur];
-    vid.pause();
-    if (t.dataset.video) {
+    vid.pause(); stopYT();
+    if (t.dataset.youtube) {
+      big.hidden = true; big.removeAttribute("src");
+      vid.hidden = true; vid.removeAttribute("src"); vid.load();
+      playYT(t.dataset.youtube);
+    } else if (t.dataset.video) {
       big.hidden = true; big.removeAttribute("src");
       vid.hidden = false; vid.poster = t.dataset.poster; vid.src = t.dataset.video; vid.play().catch(() => {});
     } else {
@@ -273,9 +289,9 @@
     count.textContent = (cur + 1) + " of " + tiles.length;
     warm(cur + 1); warm(cur - 1);
   }
-  function close() { vid.pause(); lb.close(); }
+  function close() { vid.pause(); stopYT(); lb.close(); }
   tiles.forEach((t, i) => t.addEventListener("click", () => { show(i); lb.showModal(); }));
-  lb.addEventListener("close", () => { vid.pause(); tiles[cur].focus({ preventScroll: true }); });
+  lb.addEventListener("close", () => { vid.pause(); stopYT(); tiles[cur].focus({ preventScroll: true }); });
   document.getElementById("lb-x").onclick = close;
   document.getElementById("lb-prev").onclick = () => show(cur - 1);
   document.getElementById("lb-next").onclick = () => show(cur + 1);

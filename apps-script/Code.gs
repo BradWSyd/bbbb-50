@@ -118,9 +118,9 @@ function sendConfirmation_(name, email, attending, party) {
   const yes = attending === 'Yes';
   const intro = yes ? `You’re in, ${first}.` : `Noted as a maybe, ${first}.`;
   const lede = yes
-    ? 'Thanks for your RSVP. Here are the details to keep handy.'
-    : 'No stress. Here are the details in case you can make it.';
-  const partyLine = party > 1 ? ` Party of ${party}.` : '';
+    ? 'Thanks for your RSVP.<br>Here are the details to keep handy.'
+    : 'No stress.<br>Here are the details in case you can make it.';
+  const partyLine = party > 1 ? `<br>Party of ${party}.` : '';
   const gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + '&text=' + encodeURIComponent(EVENT.title)
     + '&dates=' + EVENT.startUtc + '/' + EVENT.endUtc
@@ -134,12 +134,12 @@ function sendConfirmation_(name, email, attending, party) {
   const font = "Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif";
   const label = `margin:0 0 4px;font-size:12px;line-height:16px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:${C.label}`;
   const body = `margin:0;font-size:16px;line-height:24px;color:${C.ink}`;
-  const small = `margin:4px 0 0;font-size:14px;line-height:21px;color:${C.soft}`;
-  const row = (title, main, extra) => `
+  const small = `margin:0;font-size:14px;line-height:21px;color:${C.soft}`;
+  // Every detail uses one text style, one sentence per line.
+  const row = (title, lines) => `
           <tr><td style="padding:0 0 20px">
             <p style="${label}">${title}</p>
-            <p style="${body}">${main}</p>${extra ? `
-            <p style="${small}">${extra}</p>` : ''}
+            <p style="${body}">${lines.join('<br>')}</p>
           </td></tr>`;
   const btn = (href, text, solid) => `<a href="${href}" style="display:inline-block;margin:0 8px 8px 0;padding:12px 22px;border-radius:999px;font-family:${font};font-size:15px;line-height:20px;font-weight:600;text-decoration:none;`
     + (solid ? `background:${C.crusta};color:${C.ink};border:1px solid ${C.crusta}` : `background:${C.card};color:${C.ink};border:1px solid ${C.ink}`)
@@ -165,28 +165,30 @@ function sendConfirmation_(name, email, attending, party) {
         <p style="margin:0 0 24px;font-size:16px;line-height:24px;color:${C.soft}">${lede}${partyLine}</p>
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ${C.line}">
           <tr><td style="padding:20px 0 0"></td></tr>${
-          row('When', 'Saturday 21 November', '2:00pm to 6:00pm')}${
-          row('Where', 'Wentworth Bar, Sofitel Sydney Wentworth', `<a href="${MAP_URL}" style="color:${C.ink};text-decoration:underline">Level 5, 61–101 Phillip St, Sydney</a>`)}${
-          row('What’s on', 'Bar tab from 2pm until it runs out.', 'Snacks from 3pm. Happy hour from 4pm.<br>Off to a gig that night? You’re out by 6pm at the latest.')}${
-          row('Dress code', 'Garden party vibes.', 'The Wentworth Bar has covered areas, so we’re on rain or shine.')}${
-          row('Getting there', 'Martin Place train station is a short walk. The Metro is across the road.', 'Plenty of CBD bus routes. Paid parking close by. Lift access to Level 5.')}${
-          row('Dietary needs or allergies?', 'Reply to this email so Brad can sort the snacks.')}
+          row('When', ['Saturday 21 November', '2:00pm to 6:00pm'])}${
+          row('Where', ['Wentworth Bar', 'Sofitel Sydney Wentworth', `<a href="${MAP_URL}" style="color:${C.ink};text-decoration:underline">Level 5, 61–101 Phillip St, Sydney</a>`])}${
+          row('What’s on', ['Bar tab from 2pm until it runs out.', 'Snacks from 3pm.', 'Happy hour from 4pm.'])}${
+          row('Dress code', ['Garden party vibes.', 'The Wentworth Bar has covered areas, so we’re on rain or shine.'])}${
+          row('Getting there', ['Martin Place train station is a short walk.', 'The Metro is across the road.', 'Plenty of CBD bus routes.', 'Paid parking close by.', 'Lift access to Level 5.'])}${
+          row('Dietary needs or allergies?', ['Reply to this email so Brad can sort the snacks.'])}
         </table>
       </td></tr>
       <tr><td style="padding:4px 28px 20px;border-top:1px solid ${C.line}">
         <p style="${label};margin:20px 0 12px">Add it to your calendar</p>
         ${btn(ICS_URL, 'Add to calendar', true)}${btn(gcal, 'Google Calendar', false)}
-        <p style="${small};margin:4px 0 0">On an iPhone or Mac? Use Add to calendar. Google Calendar asks you to sign in to Google.</p>
+        <p style="${small};margin:4px 0 0">On an iPhone or Mac? Use Add to calendar.<br>Google Calendar asks you to sign in to Google.</p>
       </td></tr>
       <tr><td style="padding:20px 28px 28px;border-top:1px solid ${C.line}">
-        <p style="${body}">Plans change? <a href="${SITE}/#rsvp" style="color:${C.ink};text-decoration:underline">RSVP again</a> with the same mobile or email, and it updates your reply.</p>
-        <p style="${body};margin-top:12px">See you on the terrace.</p>
+        <p style="${body}">Plans change?<br>Reply to this email or <a href="${SITE}/#rsvp" style="color:${C.ink};text-decoration:underline">RSVP again</a> with the same mobile or email.</p>
+        <p style="${body};margin-top:16px">See you at the Wentworth Bar.<br>Brad</p>
       </td></tr>
     </table>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;font-family:${font}">
       <tr><td style="padding:16px 28px 0;font-size:12px;line-height:18px;color:${C.soft}">
-        B.B.B.B 50. Fifty years in the making. <a href="${SITE}/memories.html" style="color:${C.soft};text-decoration:underline">See the memories</a><br>
-        Your RSVP sits in a private Google Sheet only Brad can see. It will be deleted by 1 December 2026.
+        B.B.B.B 50. Fifty years in the making.<br>
+        <a href="${SITE}/memories.html" style="color:${C.soft};text-decoration:underline">See the memories.</a><br><br>
+        Your RSVP sits in a private Google Sheet only Brad can see.<br>
+        It will be deleted by 1 December 2026.
       </td></tr>
     </table>
   </td></tr>
@@ -207,8 +209,10 @@ function sendConfirmation_(name, email, attending, party) {
     'Google Calendar (needs a Google sign-in): ' + gcal,
     '',
     'Dietary needs or allergies? Reply to this email.',
-    'Plans change? RSVP again at ' + SITE + ' with the same mobile or email.',
-    'See you on the terrace.'
+    'Plans change? Reply to this email or RSVP again at ' + SITE + ' with the same mobile or email.',
+    '',
+    'See you at the Wentworth Bar.',
+    'Brad'
   ].filter(l => l !== null).join('\n');
 
   const opts = { htmlBody: html, name: 'Brad Wright', replyTo: FROM_EMAIL };

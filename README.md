@@ -9,6 +9,7 @@ A one-page RSVP site on True Black. Replies land in a Google Sheet. Each guest g
 - `assets/years/` — the memories photos, invites and video clips (`<year>-v<n>.mp4` + `.jpg` poster), shrunk for phones
 - `assets/bbbb50-shimmer.mp4`, `bbbb50-sweep-sq.mp4`, `bbbb50-still.jpg`, `bbbb50-sweep-end.jpg` — v3 colour-sweep logo: hero loop, paint-on, and their stills
 - `assets/bbbb-mark.png` — the brush-script B.B.B.B FIFTY mark on True Black
+- `assets/bbbb50-share.jpg` — the 1200×630 link preview for WhatsApp, iMessage and social. `favicon-32.png` and `apple-touch-icon.png` are the tab and home-screen icons
 - `apps-script/Code.gs` — the backend that logs rows and sends emails
 
 ## Set up (about 20 minutes)
@@ -29,7 +30,7 @@ A one-page RSVP site on True Black. Replies land in a Google Sheet. Each guest g
 - **Headcount.** For your live number, add this in a spare cell: `=SUM(FILTER(RSVPs!G:G, RSVPs!E:E="Yes"))`. Swap `"Yes"` for `"Maybe"` to see the maybes.
 - **Email limit.** A personal Google account can send about 100 emails a day from Apps Script. That's plenty for this list.
 - **Search engines.** The page tells Google not to index it, because it shows the address and guest details. A public mood board page, if you build one, should be a separate page.
-- **Colours.** Crusta and Razzmatazz use standard values. Swap them for your v1.2 design-system values at the top of the CSS.
+- **Colours.** Crusta means "do this" (main buttons). Turquoise means "you chose this" (selected chips, focus). Razzmatazz means "fix this" (errors only). Values sit at the top of the CSS.
 - **Spam.** A hidden field catches bots. Anything it catches is ignored.
 
 ## Memories wall: how to change it

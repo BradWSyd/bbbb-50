@@ -5,16 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
-<title>INVITATION · Brad’s Big Birthday Bash</title>
-<meta name="description" content="Saturday 21 November, 2pm to 6pm. Wentworth Bar, Sofitel Sydney Wentworth.">
+<title>Brad’s 50th · Sat 21 Nov · B.B.B.B</title>
+<meta name="description" content="Saturday 21 November, 2pm to 6pm. Wentworth Bar, Sofitel Sydney Wentworth. RSVP by Saturday 14 November.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bbbb50.brad-wright.com/">
-<meta property="og:title" content="INVITATION · Brad’s Big Birthday Bash">
-<meta property="og:description" content="Saturday 21 November, 2pm to 6pm. Wentworth Bar, Sofitel Sydney Wentworth.">
-<meta property="og:image" content="https://bbbb50.brad-wright.com/assets/bbbb50-still.jpg">
-<meta property="og:image:width" content="1280">
-<meta property="og:image:height" content="498">
-<meta property="og:image:alt" content="B.B.B.B Fifty">
+<meta property="og:title" content="You’re invited: Brad’s 50th, Sat 21 Nov">
+<meta property="og:description" content="2pm to 6pm, Wentworth Bar, Sofitel Sydney Wentworth. RSVP by Saturday 14 November.">
+<meta property="og:image" content="https://bbbb50.brad-wright.com/assets/bbbb50-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="B.B.B.B Fifty. Saturday 21 November, Wentworth Bar, Sydney.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script>
   /* Intro: show the paint-on once per visit. Skip it for reduced motion,
      for links straight to a section (#rsvp), and after it has been seen. */
@@ -32,11 +35,13 @@
   :root {
     --black: #000000;
     --paper: #FFFDFD;
-    --paper-soft: rgba(255, 253, 253, 0.66);
+    --paper-soft: rgba(255, 253, 253, 0.78);
     --paper-faint: rgba(255, 253, 253, 0.16);
     --crusta: #FF7E2C;      /* v1.2 design system */
     --razzmatazz: #F42168;  /* v1.2 design system */
     --turquoise: #71E6E8;   /* v1.2 design system, dark backgrounds only */
+    /* Colour roles: Crusta = do this (main actions). Turquoise = you chose this
+       (selected chips, focus). Razzmatazz = fix this (errors only). */
     --font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
     color-scheme: dark;
     box-sizing: border-box;
@@ -61,52 +66,54 @@
   .hero { padding: clamp(3rem, 10vw, 6rem) 0 2.5rem; text-align: center; }
   .hero img { width: 100%; height: auto; display: block; }
   .hero .kicker {
-    margin: 2rem 0 0.6rem;
-    color: var(--crusta);
+    margin: 2rem 0 0.75rem;
+    color: var(--paper-soft);
     font-weight: 600;
-    font-size: clamp(0.72rem, 2.2vw, 0.85rem);
-    letter-spacing: 0.45em;
-    padding-left: 0.45em;
+    font-size: 0.8125rem;
+    letter-spacing: 0.3em;
+    padding-left: 0.3em; /* balance the tracking */
   }
   .hero h1 {
-    margin: 0 0 0.5rem;
-    font-weight: 500;
-    font-size: clamp(0.8rem, 2.6vw, 1rem);
-    letter-spacing: 0.38em;
-    text-transform: uppercase;
-    padding-left: 0.38em; /* balance the tracking */
+    margin: 0 0 1rem;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 7vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
   }
-  .hero p {
+  .hero .when {
     margin: 0;
-    color: var(--paper-soft);
-    font-size: clamp(0.72rem, 2.2vw, 0.85rem);
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    padding-left: 0.3em;
+    color: var(--crusta);
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.4;
   }
+  .hero .where { margin: 0.2rem 0 1.75rem; color: var(--paper-soft); font-size: 0.9375rem; }
+  .hero .send { margin-top: 0; }
 
   /* Details */
-  .details { border-top: 1px solid var(--paper-faint); padding: 2.5rem 0; }
+  .details { border-top: 1px solid var(--paper-faint); padding: 3rem 0; }
   .details dl { margin: 0; display: grid; gap: 1.5rem; }
-  .details dt { color: var(--crusta); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .details dt { color: var(--turquoise); font-weight: 600; font-size: 0.9375rem; margin-bottom: 0.2rem; }
   .details dd { margin: 0; }
-  .details dd small { display: block; color: var(--paper-soft); font-size: 0.95rem; }
+  .details dd small { display: block; color: var(--paper-soft); font-size: 0.9375rem; }
+  .details dd small.plain { color: var(--paper); }
   .details a { color: var(--paper); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
 
   /* Link to the memories timeline */
   .memories { border-top: 1px solid var(--paper-faint); padding: 2rem 0; }
   .mem-link { display: block; text-decoration: none; color: var(--paper); }
-  .mem-link span { display: block; font-weight: 300; font-size: clamp(1.6rem, 6.5vw, 2.1rem); line-height: 1.15; }
-  .mem-link small { display: block; margin-top: 0.35rem; color: var(--paper-soft); font-size: 0.95rem; }
+  .mem-link span { display: block; font-weight: 400; font-size: clamp(1.6rem, 6.5vw, 2.1rem); line-height: 1.15; }
+  .mem-link small { display: block; margin-top: 0.35rem; color: var(--paper-soft); font-size: 0.9375rem; }
   .mem-link b { color: var(--crusta); font-weight: 600; }
 
   /* Form */
   .rsvp { border-top: 1px solid var(--paper-faint); padding: 2.5rem 0 4rem; }
-  .rsvp h2 { font-weight: 300; font-size: clamp(2rem, 8vw, 2.75rem); line-height: 1.1; margin: 0 0 0.5rem; }
+  .rsvp h2 { font-weight: 400; font-size: clamp(2rem, 8vw, 2.75rem); line-height: 1.1; margin: 0 0 0.5rem; }
   .rsvp .lede { color: var(--paper-soft); margin: 0 0 2.25rem; }
   .field { margin-bottom: 2rem; border: 0; padding: 0; min-width: 0; }
-  label, legend { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.6rem; padding: 0; }
-  .hint { display: block; font-weight: 400; color: var(--paper-soft); font-size: 0.9rem; margin-top: 0.15rem; }
+  label, legend { display: block; font-weight: 600; font-size: 1rem; margin-bottom: 0.6rem; padding: 0; }
+  .hint { display: block; font-weight: 400; color: var(--paper-soft); font-size: 0.9375rem; margin-top: 0.15rem; }
   input[type="text"], input[type="tel"], input[type="email"], textarea {
     width: 100%;
     background: transparent;
@@ -118,9 +125,9 @@
     padding: 0.5rem 0 0.6rem;
     border-radius: 0;
   }
-  textarea { min-height: 6rem; resize: vertical; border: 1px solid var(--paper-faint); padding: 0.75rem; }
-  input:focus, textarea:focus { outline: none; border-color: var(--crusta); }
-  :focus-visible { outline: 2px solid var(--crusta); outline-offset: 3px; }
+  textarea { min-height: 6rem; resize: vertical; border: 1px solid rgba(255, 253, 253, 0.45); padding: 0.75rem; }
+  input:focus, textarea:focus { outline: none; border-color: var(--turquoise); }
+  :focus-visible { outline: 2px solid var(--turquoise); outline-offset: 3px; }
 
   /* Choice pills */
   .choices { display: flex; flex-wrap: wrap; gap: 0.6rem; }
@@ -134,12 +141,12 @@
     font-weight: 500;
     font-size: 0.98rem;
   }
-  .choice input:checked + span { background: var(--paper); color: var(--black); border-color: var(--paper); }
-  .choice input:focus-visible + span { outline: 2px solid var(--crusta); outline-offset: 3px; }
+  .choice input:checked + span { background: var(--turquoise); color: var(--black); border-color: var(--turquoise); font-weight: 600; }
+  .choice input:focus-visible + span { outline: 2px solid var(--turquoise); outline-offset: 3px; }
 
   /* The "Me +" counter: the one loud moment on the page */
   .party { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
-  .party-me { font-weight: 300; font-size: clamp(3rem, 14vw, 4.5rem); line-height: 1; }
+  .party-me { font-weight: 400; font-size: clamp(3rem, 14vw, 4.5rem); line-height: 1; }
   .party-count {
     font-weight: 600;
     font-size: clamp(3rem, 14vw, 4.5rem);
@@ -161,7 +168,7 @@
     cursor: pointer;
   }
   .party button:disabled { opacity: 0.3; cursor: default; }
-  .party-note { width: 100%; color: var(--paper-soft); font-size: 0.95rem; margin: 0; }
+  .party-note { width: 100%; color: var(--paper-soft); font-size: 0.9375rem; margin: 0; }
 
   .is-hidden { display: none !important; }
   .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -181,7 +188,7 @@
   }
   .send:disabled { opacity: 0.6; cursor: progress; }
   .error { color: var(--paper); border-left: 3px solid var(--razzmatazz); padding: 0.25rem 0 0.25rem 0.9rem; margin: 1.25rem 0 0; }
-  .field-error { color: var(--razzmatazz); font-size: 0.9rem; margin: 0.4rem 0 0; }
+  .field-error { color: var(--razzmatazz); font-size: 0.9375rem; margin: 0.4rem 0 0; }
 
   /* Done state */
   .done { padding: 1rem 0 4rem; }
@@ -207,7 +214,7 @@
   .done p { margin: 0 0 1rem; }
   .diet-note { color: var(--paper-soft); }
   .diet-note a { color: var(--paper); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
-  .privacy { margin: 2rem 0 0; color: var(--paper-soft); font-size: 0.85rem; line-height: 1.5; max-width: 36rem; }
+  .privacy { margin: 2rem 0 0; color: var(--paper-soft); font-size: 0.9375rem; line-height: 1.5; max-width: 36rem; }
   .privacy b { color: var(--paper); font-weight: 600; }
   .privacy a { color: var(--paper-soft); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
   a.send, a.ghost { text-decoration: none; }
@@ -226,7 +233,8 @@
     text-decoration: none;
     cursor: pointer;
   }
-  footer { border-top: 1px solid var(--paper-faint); padding: 1.5rem 0 2.5rem; color: var(--paper-soft); font-size: 0.85rem; }
+  footer { border-top: 1px solid var(--paper-faint); padding: 1.5rem 0 2.5rem; color: var(--paper-soft); font-size: 0.9375rem; }
+  footer a { display: inline-block; padding: 0.75rem 0; }
   footer a { color: var(--paper-soft); text-decoration-color: var(--crusta); }
 
   @media (min-width: 40rem) {
@@ -270,6 +278,14 @@
     animation: intro-in 900ms ease 300ms forwards;
   }
   .intro video { width: min(100%, 34rem, 62vh); height: auto; display: block; background: var(--black); }
+  .intro-skip {
+    margin: 0;
+    color: var(--paper-soft);
+    font-size: 0.9375rem;
+    opacity: 0;
+    animation: intro-in 600ms ease 1500ms forwards;
+  }
+  .intro video::-webkit-media-controls-start-playback-button { display: none !important; }
   @keyframes intro-in { to { opacity: 1; } }
 </style>
 </head>
@@ -278,13 +294,17 @@
 <div class="intro" id="intro" role="dialog" aria-label="B.B.B.B 50 invitation">
   <p class="intro-kicker">INVITATION</p>
   <video id="intro-video" muted playsinline preload="auto" src="assets/bbbb50-sweep-sq.mp4" width="720" height="720" aria-label="The B.B.B.B Fifty logo being painted on"></video>
+  <p class="intro-skip">Tap to skip</p>
 </div>
 
 <header class="hero">
   <div class="wrap">
-    <video class="hero-loop" id="hero-loop" muted loop playsinline preload="auto" poster="assets/bbbb50-still.jpg" width="1280" height="498" src="assets/bbbb50-shimmer.mp4" role="img" aria-label="B.B.B.B Fifty"></video>
+    <video class="hero-loop" id="hero-loop" muted loop playsinline preload="none" poster="assets/bbbb50-still.jpg" width="1280" height="498" src="assets/bbbb50-shimmer.mp4" role="img" aria-label="B.B.B.B Fifty"></video>
     <p class="kicker">INVITATION</p>
     <h1>Brad’s Big Birthday Bash</h1>
+    <p class="when">Saturday 21 November · 2–6pm</p>
+    <p class="where">Wentworth Bar, Sofitel Sydney Wentworth</p>
+    <a class="send" href="#rsvp">RSVP by Sat 14 Nov</a>
   </div>
 </header>
 
@@ -294,11 +314,11 @@
       <dl>
         <div>
           <dt>When</dt>
-          <dd>Saturday 21 November<small>2:00pm to 6:00pm</small></dd>
+          <dd>Saturday 21 November<small class="plain">2:00pm to 6:00pm</small></dd>
         </div>
         <div>
           <dt>Where</dt>
-          <dd>Wentworth Bar<small>Sofitel Sydney Wentworth<br>Level 5, 61–101 Phillip St, Sydney</small></dd>
+          <dd>Wentworth Bar<small class="plain">Sofitel Sydney Wentworth<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Sofitel+Sydney+Wentworth+61-101+Phillip+St+Sydney+NSW+2000" target="_blank" rel="noopener">Level 5, 61–101 Phillip St, Sydney</a></small></dd>
         </div>
         <div class="wide">
           <dt>About the venue</dt>
@@ -314,7 +334,7 @@
         </div>
         <div class="wide">
           <dt>Getting there</dt>
-          <dd>Martin Place train station is a short walk. The Metro is across the road.<small>Plenty of CBD bus routes. Paid parking close by.</small></dd>
+          <dd>Martin Place train station is a short walk. The Metro is across the road.<small>Plenty of CBD bus routes. Paid parking close by. Lift access to Level 5.</small></dd>
         </div>
       </dl>
     </div>
@@ -329,7 +349,7 @@
   <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
     <div class="wrap">
       <h2 id="rsvp-title">RSVP</h2>
-      <p class="lede">Please RSVP by Friday 13 November.</p>
+      <p class="lede">Please RSVP by Saturday 14 November.</p>
 
       <form id="rsvp-form" novalidate>
         <div class="field">
@@ -454,7 +474,10 @@
     vid.addEventListener("error", finish);                           // clip can't load: go straight in
     if (vid.error) finish();                                         // it failed before this script ran
     vid.play().catch(() => { vid.poster = "assets/bbbb50-still.jpg"; setTimeout(finish, 2500); });   // autoplay blocked (e.g. Low Power Mode): show the logo, then open
-    setTimeout(finish, 20000);                                       // safety net on a very slow connection
+    let started = false;
+    vid.addEventListener("playing", () => { started = true; }, { once: true });
+    setTimeout(() => { if (!started) finish(); }, 4000);             // slow connection: don't hold guests on a black screen
+    setTimeout(finish, 20000);                                       // safety net if the clip stalls part way
   })();
 
   /* ---------- "Me +" counter ---------- */
@@ -535,9 +558,7 @@
     sendBtn.textContent = "Sending…";
     try {
       if (RSVP_ENDPOINT.startsWith("http")) {
-        // Apps Script can't send a readable reply to another site, so we
-        // send and treat a completed request as success.
-        await fetch(RSVP_ENDPOINT, { method: "POST", mode: "no-cors", body: data });
+        await sendRsvp(data);
       } else {
         console.warn("RSVP_ENDPOINT not set: running in preview mode, nothing saved.", Object.fromEntries(data));
         await new Promise((r) => setTimeout(r, 600));
@@ -550,6 +571,23 @@
       sendBtn.textContent = "Send my RSVP";
     }
   });
+
+  // Apps Script replies with JSON ({ ok: true } or { ok: false }). If the
+  // browser can't read that reply, fall back to a blind send: the script
+  // updates by mobile or email, so a repeat send doesn't double count.
+  async function sendRsvp(data) {
+    let res;
+    try {
+      res = await fetch(RSVP_ENDPOINT, { method: "POST", body: data });
+    } catch (err) {
+      if (!navigator.onLine) throw err;
+      await fetch(RSVP_ENDPOINT, { method: "POST", mode: "no-cors", body: data });
+      return;
+    }
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const reply = await res.json().catch(() => ({ ok: true }));
+    if (reply.ok === false) throw new Error(reply.error || "Not saved");
+  }
 
   /* ---------- Done screen ---------- */
   function showDone(name, attending, guests, hasEmail) {

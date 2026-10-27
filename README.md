@@ -5,8 +5,8 @@ A one-page RSVP site on True Black. Replies land in a Google Sheet. Each guest g
 ## What's in here
 
 - `index.html` — the page: party details, RSVP form, "Me +" counter, confirmation screen
-- `memories.html` — "Twenty years of B.B.B.B": one photo wall of past bashes (no years shown), venue line at the top, paint-on finale. Built by `make_memories.py` from `memories.template.html`
-- `assets/years/` — the memories photos, invites and the 2024 IVY clip, shrunk for phones (about 7MB)
+- `memories.html` — "Twenty years of birthday memories": one photo and video wall of past bashes (no years, no venues), paint-on finale. Built by `make_memories.py` from `memories.template.html`
+- `assets/years/` — the memories photos, invites and video clips (`<year>-v<n>.mp4` + `.jpg` poster), shrunk for phones
 - `assets/bbbb50-shimmer.mp4`, `bbbb50-sweep-sq.mp4`, `bbbb50-still.jpg`, `bbbb50-sweep-end.jpg` — v3 colour-sweep logo: hero loop, paint-on, and their stills
 - `assets/bbbb-mark.png` — the brush-script B.B.B.B FIFTY mark on True Black
 - `apps-script/Code.gs` — the backend that logs rows and sends emails
@@ -34,6 +34,6 @@ A one-page RSVP site on True Black. Replies land in a Google Sheet. Each guest g
 
 ## Memories wall: how to change it
 
-1. Open `make_memories.py`. Edit `REMOVE` (codes to hide), `WIDE` (invite graphics shown full width) or `VENUES`.
+1. Open `make_memories.py`. Edit `REMOVE` (codes to hide), `WIDE` (invite graphics shown full width), `VIDEOS` (clips) or `YOUTUBE` (videos that play in the page from YouTube).
 2. New photo? Add `assets/years/<year>-<nn>.webp` (1400px max) and `assets/years/thumbs/<year>-<nn>.webp` (640px max). Files sort by name, so the code sets its place.
 3. Run `python3 make_memories.py .` from the repo folder. It rewrites `memories.html`.

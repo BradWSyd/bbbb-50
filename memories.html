@@ -6,6 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#000000">
 <title>B.B.B.B · Twenty years of birthday memories</title>
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,11 +15,12 @@
   :root {
     --black: #000000;
     --paper: #FFFDFD;
-    --paper-soft: rgba(255, 253, 253, 0.66);
+    --paper-soft: rgba(255, 253, 253, 0.78);
     --paper-faint: rgba(255, 253, 253, 0.16);
     --placeholder: rgba(255, 253, 253, 0.06);
     --crusta: #FF7E2C;
     --razzmatazz: #F42168;
+    --turquoise: #71E6E8;
     --font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
     color-scheme: dark;
     box-sizing: border-box;
@@ -34,17 +37,17 @@
   }
   .wrap { width: min(100% - 2.5rem, 44rem); margin-inline: auto; }
   a { color: var(--paper); text-underline-offset: .2em; text-decoration-color: var(--crusta); }
-  :focus-visible { outline: 2px solid var(--crusta); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--turquoise); outline-offset: 3px; }
 
   .top { padding: 1rem 0 0; }
-  .back { font-size: .9rem; color: var(--paper-soft); }
+  .back { display: inline-block; padding: .75rem 0; font-size: .9375rem; color: var(--paper-soft); }
 
   /* Hero: logo, then one line of copy */
   .hero { text-align: center; padding: 2rem 0 2.5rem; }
   .hero video, .hero .logo { width: min(100%, 36rem); height: auto; display: block; margin: 0 auto; background: var(--black); }
   .hero h1 {
-    margin: 1.75rem 0 0; font-weight: 500; font-size: clamp(.8rem, 2.6vw, 1rem);
-    letter-spacing: .38em; text-transform: uppercase; padding-left: .38em; text-wrap: balance;
+    margin: 1.75rem 0 0; font-weight: 400; font-size: clamp(1.75rem, 7vw, 2.75rem);
+    line-height: 1.1; letter-spacing: -.01em; text-wrap: balance;
   }
 
   /* The wall: same-size square tiles that read left to right.
@@ -82,12 +85,13 @@
 
   .finale { text-align: center; padding: 2rem 0 4rem; border-top: 1px solid var(--paper-faint); margin-top: 2rem; }
   .finale video, .finale img { width: min(100%, 26rem); height: auto; display: block; margin: 0 auto; background: var(--black); }
-  .finale h2 { font-weight: 300; font-size: clamp(1.9rem, 8vw, 2.6rem); line-height: 1.1; margin: .5rem 0 1.5rem; }
+  .finale h2 { font-weight: 400; font-size: clamp(2.25rem, 10vw, 3.25rem); line-height: 1.1; margin: .5rem 0 1.5rem; }
+  .finale-when { margin: -.75rem 0 1.75rem; color: var(--crusta); font-weight: 600; font-size: 1.125rem; }
   .cta {
     display: inline-block; padding: 1rem 2rem; border-radius: 999px; background: var(--crusta);
     color: var(--black); font-weight: 600; text-decoration: none;
   }
-  footer { border-top: 1px solid var(--paper-faint); padding: 1.5rem 0 2.5rem; color: var(--paper-soft); font-size: .85rem; }
+  footer { border-top: 1px solid var(--paper-faint); padding: 1.5rem 0 2.5rem; color: var(--paper-soft); font-size: .9375rem; }
 
   /* Lightbox */
   dialog {
@@ -107,7 +111,7 @@
   .lb .next { right: .75rem; top: 50%; transform: translateY(-50%); }
   .lb .count {
     position: absolute; bottom: max(1rem, env(safe-area-inset-bottom)); left: 0; right: 0;
-    margin: 0; text-align: center; color: var(--paper-soft); font-size: .85rem; font-variant-numeric: tabular-nums;
+    margin: 0; text-align: center; color: var(--paper-soft); font-size: .9375rem; font-variant-numeric: tabular-nums;
   }
 </style>
 </head>
@@ -216,6 +220,7 @@
   <section class="finale" id="next"><div class="wrap">
     <video id="finale-video" muted playsinline preload="metadata" poster="assets/bbbb50-sweep-end.jpg" width="720" height="720" src="assets/bbbb50-sweep-sq.mp4" role="img" aria-label="The B.B.B.B Fifty logo being painted on"></video>
     <h2>Next up: the big one.</h2>
+    <p class="finale-when">Saturday 21 November · 2–6pm<br>Wentworth Bar</p>
     <a class="cta" href="index.html#rsvp">RSVP for B.B.B.B 50</a>
   </div></section>
 </main>

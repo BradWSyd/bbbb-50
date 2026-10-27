@@ -19,11 +19,14 @@
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script>
-  /* Intro: show the paint-on once per visit. Skip it for reduced motion,
-     for links straight to a section (#rsvp), and after it has been seen. */
+  /* Intro: show the paint-on whenever a guest arrives from outside the site
+     (a text, WhatsApp, email). Skip it for reduced motion, for links straight
+     to a section (#rsvp), and when coming back from the memories page.
+     (A sessionStorage flag was used before, but iOS Safari reuses an open tab
+     for the same link, so guests who had looked once never saw it again.) */
   (function () {
     var seen = false;
-    try { seen = sessionStorage.getItem("bbbb50-intro") === "1"; } catch (e) {}
+    try { seen = !!document.referrer && new URL(document.referrer).host === location.host; } catch (e) {}
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!seen && !reduce && !location.hash) document.documentElement.classList.add("has-intro");
   })();
@@ -294,7 +297,7 @@
 <div class="intro" id="intro" role="dialog" aria-label="B.B.B.B 50 invitation">
   <p class="intro-kicker">INVITATION</p>
   <video id="intro-video" muted playsinline preload="auto" src="assets/bbbb50-sweep-sq.mp4" width="720" height="720" aria-label="The B.B.B.B Fifty logo being painted on"></video>
-  <p class="intro-skip">Tap to skip</p>
+  <p class="intro-skip" id="intro-skip">Tap to skip</p>
 </div>
 
 <header class="hero">
@@ -462,22 +465,39 @@
     function finish() {
       if (done) return;
       done = true;
-      try { sessionStorage.setItem("bbbb50-intro", "1"); } catch (e) {}
       vid.pause();
       startHero();
       box.classList.add("is-leaving");
       setTimeout(() => { root.classList.remove("has-intro"); box.remove(); }, 700);
     }
-    box.addEventListener("click", finish);
+    const skip = document.getElementById("intro-skip");
+    let blocked = false;
+    box.addEventListener("click", () => {
+      if (!blocked) return finish();
+      // Autoplay was blocked (Low Power Mode, some in-app browsers): a tap
+      // counts as permission, so play the paint-on now instead of skipping it.
+      blocked = false;
+      skip.textContent = "Tap to skip";
+      vid.removeAttribute("poster");
+      vid.currentTime = 0;
+      vid.play().catch(finish);
+    });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" || e.key === "Enter") finish(); });
     vid.addEventListener("ended", () => setTimeout(finish, 900));   // hold on the final frame, then open
     vid.addEventListener("error", finish);                           // clip can't load: go straight in
     if (vid.error) finish();                                         // it failed before this script ran
-    vid.play().catch(() => { vid.poster = "assets/bbbb50-still.jpg"; setTimeout(finish, 2500); });   // autoplay blocked (e.g. Low Power Mode): show the logo, then open
     let started = false;
     vid.addEventListener("playing", () => { started = true; }, { once: true });
-    setTimeout(() => { if (!started) finish(); }, 4000);             // slow connection: don't hold guests on a black screen
-    setTimeout(finish, 20000);                                       // safety net if the clip stalls part way
+    vid.play().catch(() => {                                         // autoplay blocked: show the logo and wait for a tap
+      blocked = true;
+      vid.poster = "assets/bbbb50-sweep-end.jpg";
+      vid.load();                                                    // drop any black first frame so the poster shows
+      skip.textContent = "Tap to open";
+      skip.style.animationDelay = "0ms";
+      setTimeout(() => { if (blocked) finish(); }, 12000);           // nobody tapped: open anyway
+    });
+    setTimeout(() => { if (!started && !blocked) finish(); }, 4000); // slow connection: don't hold guests on a black screen
+    setTimeout(() => { if (!blocked) finish(); }, 20000);            // safety net if the clip stalls part way
   })();
 
   /* ---------- "Me +" counter ---------- */

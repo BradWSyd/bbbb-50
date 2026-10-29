@@ -17,7 +17,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const EVENT = {
   title: "B.B.B.B 50 – Brad’s Big Birthday Bash",
-  when: 'Saturday 21 November 2026, 1:00 pm – 5:00 pm',
+  when: 'Saturday 21 November 2026, 1 pm – 5 pm',
   where: 'Bloom Potts Point, 66–68 Kellett St, Potts Point NSW 2011',
   startUtc: '20261121T020000Z',  // 1pm AEDT
   endUtc: '20261121T060000Z',    // 5pm AEDT
@@ -152,7 +152,7 @@ function sendConfirmation_(name, email, attending, party) {
 <title>B.B.B.B 50</title>
 </head>
 <body style="margin:0;padding:0;background:${C.page};-webkit-text-size-adjust:100%">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0">${yes ? 'See you Saturday 21 November, 1:00 pm – 5:00 pm, Bloom Potts Point.' : 'Saturday 21 November, 1:00 pm – 5:00 pm, Bloom Potts Point. RSVP by Sat 14 Nov.'}</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0">${yes ? 'See you Saturday 21 November, 1 pm – 5 pm, Bloom Potts Point.' : 'Saturday 21 November, 1 pm – 5 pm, Bloom Potts Point. RSVP by Sat 14 Nov.'}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.page}">
   <tr><td align="center" style="padding:24px 12px">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background:${C.card};border:1px solid ${C.line};border-radius:16px;font-family:${font}">
@@ -165,7 +165,7 @@ function sendConfirmation_(name, email, attending, party) {
         <p style="margin:0 0 24px;font-size:16px;line-height:24px;color:${C.soft}">${lede}${partyLine}</p>
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ${C.line}">
           <tr><td style="padding:20px 0 0"></td></tr>${
-          row('When', ['Saturday 21 November', '1:00 pm – 5:00 pm'])}${
+          row('When', ['Saturday 21 November', '1 pm – 5 pm'])}${
           row('Where', ['Bloom Potts Point', `<a href="${MAP_URL}" style="color:${C.ink};text-decoration:underline">66–68 Kellett St, Potts Point</a>`])}${
           row('What’s on', ['Antipasto, shared bites and platters all afternoon.', 'Handcrafted cocktails, spritzers, beers and wines at the bar. Pay as you go.'])}${
           row('Entertainment', ['DJ Alex Taylor, then DJ 1-UP.'])}${
@@ -200,7 +200,7 @@ function sendConfirmation_(name, email, attending, party) {
     yes ? `You’re in, ${name.split(/\s+/)[0]}.` : `Noted as a maybe, ${name.split(/\s+/)[0]}.`,
     party > 1 ? `Party of ${party}.` : null,
     '',
-    'When: Saturday 21 November, 1:00 pm – 5:00 pm',
+    'When: Saturday 21 November, 1 pm – 5 pm',
     'Where: Bloom Potts Point, 66–68 Kellett St, Potts Point. Map: ' + MAP_URL,
     'What’s on: Antipasto, shared bites and platters all afternoon. Handcrafted cocktails, spritzers, beers and wines at the bar. Pay as you go.',
     'Entertainment: DJ Alex Taylor, then DJ 1-UP.',

@@ -1,4 +1,5 @@
 """Builds memories.html: one clean photo wall, no years shown.
+Also refreshes the photo list for the memories reel on index.html.
 Edit REMOVE / WIDE / VIDEOS / YOUTUBE below, then run: python3 make_memories.py <repo dir>"""
 import os, sys, glob, html
 from PIL import Image
@@ -47,4 +48,14 @@ for i, c in enumerate(codes):
 tpl = open(os.path.join(os.path.dirname(__file__), "memories.template.html"), encoding="utf-8").read()
 out = tpl.replace("{{TILES}}", "\n    ".join(tiles)).replace("{{COUNT}}", str(len(tiles)))
 open(os.path.join(REPO, "memories.html"), "w", encoding="utf-8").write(out)
+
+# The invitation's memories reel: photos only (no videos or invite graphics)
+import json, re
+photos = [[c, *Image.open(os.path.join(REPO, f"assets/years/thumbs/{c}.webp")).size]
+          for c in codes if c not in WIDE and c not in VIDEOS and c not in YOUTUBE]
+idx = os.path.join(REPO, "index.html")
+page = open(idx, encoding="utf-8").read()
+page = re.sub(r"const MEMORY_PHOTOS = \[.*?\];", lambda m: "const MEMORY_PHOTOS = " + json.dumps(photos, separators=(",", ":")) + ";", page, count=1, flags=re.S)
+open(idx, "w", encoding="utf-8").write(page)
+print(len(photos), "photos in the invitation reel")
 print(len(tiles), "tiles;", sum(c in WIDE for c in codes), "wide")

@@ -124,7 +124,7 @@ function sendConfirmation_(name, email, attending, party) {
   const gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + '&text=' + encodeURIComponent(EVENT.title)
     + '&dates=' + EVENT.startUtc + '/' + EVENT.endUtc
-    + '&details=' + encodeURIComponent('Antipasto, shared bites and platters. Pay-as-you-go bar. DJs Alex Taylor and 1-UP. Garden party vibes. ' + SITE)
+    + '&details=' + encodeURIComponent('Antipasto, shared bites and platters. Drinks available for purchase at the bar. DJs Alex Taylor and 1-UP. Garden party vibes. ' + SITE)
     + '&location=' + encodeURIComponent(EVENT.where);
 
   // Light, email-safe palette from the brand: Eerie Black text on white, Crusta for actions,
@@ -167,7 +167,7 @@ function sendConfirmation_(name, email, attending, party) {
           <tr><td style="padding:20px 0 0"></td></tr>${
           row('When', ['Saturday 21 November', '1 pm – 5 pm'])}${
           row('Where', ['Bloom Potts Point', `<a href="${MAP_URL}" style="color:${C.ink};text-decoration:underline">66–68 Kellett St, Potts Point</a>`])}${
-          row('What’s on', ['Antipasto, shared bites and platters all afternoon.', 'Handcrafted cocktails, spritzers, beers and wines at the bar. Pay as you go.'])}${
+          row('About the venue', ['A sunlit Italian hideaway in the heart of Potts Point with warm hospitality.', 'Antipasto, shared bites and platters provided all afternoon.', 'Handcrafted cocktails, spritzers, beers and wines available for purchase at the bar.'])}${
           row('Entertainment', ['DJ Alex Taylor, then DJ 1-UP.'])}${
           row('Dress code', ['Garden party vibes.', 'Splashes of colour and your best sunnies.'])}${
           row('Getting there', ['Kings Cross train station is a short walk.', 'Street parking is very limited.', 'Uber and taxi drop-off is at the corner of Roslyn Street and Ward Avenue.'])}${
@@ -202,7 +202,7 @@ function sendConfirmation_(name, email, attending, party) {
     '',
     'When: Saturday 21 November, 1 pm – 5 pm',
     'Where: Bloom Potts Point, 66–68 Kellett St, Potts Point. Map: ' + MAP_URL,
-    'What’s on: Antipasto, shared bites and platters all afternoon. Handcrafted cocktails, spritzers, beers and wines at the bar. Pay as you go.',
+    'About the venue: A sunlit Italian hideaway in the heart of Potts Point with warm hospitality. Antipasto, shared bites and platters provided all afternoon. Handcrafted cocktails, spritzers, beers and wines available for purchase at the bar.',
     'Entertainment: DJ Alex Taylor, then DJ 1-UP.',
     'Dress code: ' + EVENT.dress,
     'Getting there: Kings Cross train station is a short walk. Street parking is very limited. Uber and taxi drop-off is at the corner of Roslyn Street and Ward Avenue.',

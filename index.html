@@ -94,6 +94,9 @@
   .hero .where { margin: 0.2rem 0 1.75rem; color: var(--paper-soft); font-size: 0.9375rem; }
   .hero .send { margin-top: 0; }
 
+  /* The whole page is centred, to match the hero */
+  main { text-align: center; }
+
   /* Details */
   .details { border-top: 1px solid var(--paper-faint); padding: 3rem 0; }
   .details dl { margin: 0; display: grid; gap: 1.5rem; }
@@ -102,13 +105,22 @@
   .details dd small { display: block; color: var(--paper-soft); font-size: 0.9375rem; }
   .details dd small.plain { color: var(--paper); }
   .details a { color: var(--paper); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
-  .details .djs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem; max-width: 26rem; }
+  .details .djs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 0.5rem auto 0; max-width: 26rem; }
   .details .djs > img, .details .dj-tile { width: 100%; height: auto; aspect-ratio: 1; display: block; border-radius: 6px; }
   .details .dj-tile { border: 1px solid var(--paper-faint); display: grid; place-items: center; box-sizing: border-box; }
   .details .dj-tile img { width: 78%; height: auto; display: block; }
 
   /* Memories: a strip of past-birthday photos that slides on its own */
   .memories { border-top: 1px solid var(--paper-faint); padding: 2.5rem 0; text-align: center; }
+  /* "20 years of birthdays" heading, same as the memories page but smaller */
+  .twenty { margin: 0 0 1.75rem; font-weight: 400; line-height: 1; }
+  .twenty .big {
+    display: inline-block; font-weight: 700; font-size: clamp(3.75rem, 17vw, 5.5rem); line-height: .9; letter-spacing: -.03em;
+    background: linear-gradient(100deg, #FF7E2C, #F42168, #E024C8, #8B3BF2, #2F6BFF, #71E6E8);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .twenty .lab { display: block; margin-top: .5rem; font-weight: 600; font-size: .8125rem; letter-spacing: .3em; padding-left: .3em; text-transform: uppercase; }
+  .twenty .yrs { display: block; margin-top: .4rem; color: var(--paper-soft); font-size: .8125rem; letter-spacing: .08em; }
   .reel { overflow: hidden; margin-bottom: 1.75rem; }
   .reel-track { display: flex; gap: 4px; width: max-content; }
   .reel-track img { height: clamp(9rem, 32vw, 12rem); width: auto; display: block; border-radius: 4px; background: var(--placeholder, rgba(255, 253, 253, 0.06)); }
@@ -138,15 +150,16 @@
     color: var(--paper);
     font: inherit;
     font-size: 1.15rem;
+    text-align: center;
     padding: 0.5rem 0 0.6rem;
     border-radius: 0;
   }
-  textarea { min-height: 6rem; resize: vertical; border: 1px solid rgba(255, 253, 253, 0.45); padding: 0.75rem; }
+  textarea { min-height: 6rem; resize: vertical; border: 1px solid rgba(255, 253, 253, 0.45); padding: 0.75rem; text-align: left; }
   input:focus, textarea:focus { outline: none; border-color: var(--turquoise); }
   :focus-visible { outline: 2px solid var(--turquoise); outline-offset: 3px; }
 
   /* Choice pills */
-  .choices { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
   .choice { position: relative; }
   .choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
   .choice span {
@@ -161,7 +174,7 @@
   .choice input:focus-visible + span { outline: 2px solid var(--turquoise); outline-offset: 3px; }
 
   /* The "Me +" counter: the one loud moment on the page */
-  .party { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+  .party { display: flex; align-items: center; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
   .party-me { font-weight: 400; font-size: clamp(3rem, 14vw, 4.5rem); line-height: 1; }
   .party-count {
     font-weight: 600;
@@ -203,7 +216,7 @@
     cursor: pointer;
   }
   .send:disabled { opacity: 0.6; cursor: progress; }
-  .error { color: var(--paper); border-left: 3px solid var(--razzmatazz); padding: 0.25rem 0 0.25rem 0.9rem; margin: 1.25rem 0 0; }
+  .error { width: fit-content; text-align: left; color: var(--paper); border-left: 3px solid var(--razzmatazz); padding: 0.25rem 0 0.25rem 0.9rem; margin: 1.25rem auto 0; }
   .field-error { color: var(--razzmatazz); font-size: 0.9375rem; margin: 0.4rem 0 0; }
 
   /* Done state */
@@ -230,11 +243,11 @@
   .done p { margin: 0 0 1rem; }
   .diet-note { color: var(--paper-soft); }
   .diet-note a { color: var(--paper); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
-  .privacy { margin: 2rem 0 0; color: var(--paper-soft); font-size: 0.9375rem; line-height: 1.5; max-width: 36rem; }
+  .privacy { margin: 2rem auto 0; color: var(--paper-soft); font-size: 0.9375rem; line-height: 1.5; max-width: 36rem; }
   .privacy b { color: var(--paper); font-weight: 600; }
   .privacy a { color: var(--paper-soft); text-underline-offset: 0.2em; text-decoration-color: var(--crusta); }
   a.send, a.ghost { text-decoration: none; }
-  .cal-links { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .cal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; align-items: center; }
   .cal-links a { margin-top: 0.5rem; }
   .ghost {
     display: inline-block;
@@ -342,6 +355,10 @@
           <dd>Antipasto, shared bites and platters all afternoon.<small>Handcrafted cocktails, spritzers, beers and wines at the bar. Pay as you go.</small></dd>
         </div>
         <div>
+          <dt>Did you know?</dt>
+          <dd>It’s Troy’s birthday too!<small>Same day, six years apart. Two birthdays, one party.</small></dd>
+        </div>
+        <div>
           <dt>Dress code</dt>
           <dd>Garden party vibes.<small>Splashes of colour and your best sunnies.</small></dd>
         </div>
@@ -360,9 +377,10 @@
     </div>
   </section>
 
-  <section class="memories" aria-label="Birthday memories">
+  <section class="memories">
+    <h2 class="twenty"><span class="big">20</span><span class="lab">Years of birthdays</span><span class="yrs">2006–2025</span></h2>
     <div class="reel" id="reel" aria-hidden="true"><div class="reel-track" id="reel-track"></div></div>
-    <a class="more" href="memories.html">See more birthday memories</a>
+    <a class="more" href="memories.html">See all the birthday memories</a>
   </section>
 
   <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">

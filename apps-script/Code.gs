@@ -12,16 +12,16 @@ const DAILY_EMAIL_CAP = 60;   // Stops a bot burning the ~100/day Gmail limit. R
 const SITE = 'https://bbbb50.brad-wright.com';
 const ICS_URL = SITE + '/BBBB50.ics';   // hosted calendar file, replaces the attachment
 const LOGO_URL = SITE + '/assets/bbbb50-still.jpg';   // the B.B.B.B Fifty mark, already live on the site
-const MAP_URL = 'https://www.google.com/maps/search/?api=1&query=Sofitel+Sydney+Wentworth+61-101+Phillip+St+Sydney+NSW+2000';
+const MAP_URL = 'https://www.google.com/maps/search/?api=1&query=Bloom+Potts+Point+66-68+Kellett+St+Potts+Point+NSW+2011';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const EVENT = {
   title: "B.B.B.B 50 – Brad’s Big Birthday Bash",
-  when: 'Saturday 21 November 2026, 2pm to 6pm',
-  where: 'Wentworth Bar (Level 5), Sofitel Sydney Wentworth, 61–101 Phillip Street, Sydney NSW 2000',
-  startUtc: '20261121T030000Z',  // 2pm AEDT
-  endUtc: '20261121T070000Z',    // 6pm AEDT
-  dress: 'Garden party vibes. The Wentworth Bar has covered areas, so we’re on rain or shine.'
+  when: 'Saturday 21 November 2026, 1:00 pm – 5:00 pm',
+  where: 'Bloom Potts Point, 66–68 Kellett St, Potts Point NSW 2011',
+  startUtc: '20261121T020000Z',  // 1pm AEDT
+  endUtc: '20261121T060000Z',    // 5pm AEDT
+  dress: 'Garden party vibes. Splashes of colour and your best sunnies.'
 };
 
 const HEADERS = ['Received', 'Name', 'Mobile', 'Email', 'Coming?', 'Plus', 'Party size',
@@ -124,7 +124,7 @@ function sendConfirmation_(name, email, attending, party) {
   const gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + '&text=' + encodeURIComponent(EVENT.title)
     + '&dates=' + EVENT.startUtc + '/' + EVENT.endUtc
-    + '&details=' + encodeURIComponent('Bar tab from 2pm. Snacks from 3pm. Happy hour from 4pm. Garden party vibes. ' + SITE)
+    + '&details=' + encodeURIComponent('Antipasto, shared bites and platters. Pay-as-you-go bar. DJs Alex Taylor and 1-UP. Garden party vibes. ' + SITE)
     + '&location=' + encodeURIComponent(EVENT.where);
 
   // Light, email-safe palette from the brand: Eerie Black text on white, Crusta for actions,
@@ -152,7 +152,7 @@ function sendConfirmation_(name, email, attending, party) {
 <title>B.B.B.B 50</title>
 </head>
 <body style="margin:0;padding:0;background:${C.page};-webkit-text-size-adjust:100%">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0">${yes ? 'See you Saturday 21 November, 2pm to 6pm, Wentworth Bar.' : 'Saturday 21 November, 2pm to 6pm, Wentworth Bar. RSVP by Sat 14 Nov.'}</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0">${yes ? 'See you Saturday 21 November, 1:00 pm – 5:00 pm, Bloom Potts Point.' : 'Saturday 21 November, 1:00 pm – 5:00 pm, Bloom Potts Point. RSVP by Sat 14 Nov.'}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.page}">
   <tr><td align="center" style="padding:24px 12px">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background:${C.card};border:1px solid ${C.line};border-radius:16px;font-family:${font}">
@@ -165,12 +165,13 @@ function sendConfirmation_(name, email, attending, party) {
         <p style="margin:0 0 24px;font-size:16px;line-height:24px;color:${C.soft}">${lede}${partyLine}</p>
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ${C.line}">
           <tr><td style="padding:20px 0 0"></td></tr>${
-          row('When', ['Saturday 21 November', '2:00pm to 6:00pm'])}${
-          row('Where', ['Wentworth Bar', 'Sofitel Sydney Wentworth', `<a href="${MAP_URL}" style="color:${C.ink};text-decoration:underline">Level 5, 61–101 Phillip St, Sydney</a>`])}${
-          row('What’s on', ['Bar tab from 2pm until it runs out.', 'Snacks from 3pm.', 'Happy hour from 4pm.'])}${
-          row('Dress code', ['Garden party vibes.', 'The Wentworth Bar has covered areas, so we’re on rain or shine.'])}${
-          row('Getting there', ['Martin Place train station is a short walk.', 'The Metro is across the road.', 'Plenty of CBD bus routes.', 'Paid parking close by.', 'Lift access to Level 5.'])}${
-          row('Dietary needs or allergies?', ['Reply to this email so Brad can sort the snacks.'])}
+          row('When', ['Saturday 21 November', '1:00 pm – 5:00 pm'])}${
+          row('Where', ['Bloom Potts Point', `<a href="${MAP_URL}" style="color:${C.ink};text-decoration:underline">66–68 Kellett St, Potts Point</a>`])}${
+          row('What’s on', ['Antipasto, shared bites and platters all afternoon.', 'Handcrafted cocktails, spritzers, beers and wines at the bar. Pay as you go.'])}${
+          row('Entertainment', ['DJ Alex Taylor, then DJ 1-UP.'])}${
+          row('Dress code', ['Garden party vibes.', 'Splashes of colour and your best sunnies.'])}${
+          row('Getting there', ['Kings Cross train station is a short walk.', 'Street parking is very limited.', 'Uber and taxi drop-off is at the corner of Roslyn Street and Ward Avenue.'])}${
+          row('Dietary needs or allergies?', ['Reply to this email and Brad will pass them on to the venue.'])}
         </table>
       </td></tr>
       <tr><td style="padding:4px 28px 20px;border-top:1px solid ${C.line}">
@@ -180,7 +181,7 @@ function sendConfirmation_(name, email, attending, party) {
       </td></tr>
       <tr><td style="padding:20px 28px 28px;border-top:1px solid ${C.line}">
         <p style="${body}">Plans change?<br>Reply to this email or <a href="${SITE}/#rsvp" style="color:${C.ink};text-decoration:underline">RSVP again</a> with the same mobile or email.</p>
-        <p style="${body};margin-top:16px">See you at the Wentworth Bar.<br>Brad</p>
+        <p style="${body};margin-top:16px">See you at Bloom.<br>Brad</p>
       </td></tr>
     </table>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;font-family:${font}">
@@ -199,19 +200,20 @@ function sendConfirmation_(name, email, attending, party) {
     yes ? `You’re in, ${name.split(/\s+/)[0]}.` : `Noted as a maybe, ${name.split(/\s+/)[0]}.`,
     party > 1 ? `Party of ${party}.` : null,
     '',
-    'When: Saturday 21 November, 2:00pm to 6:00pm',
-    'Where: Wentworth Bar, Sofitel Sydney Wentworth. Level 5, 61–101 Phillip St, Sydney',
-    'What’s on: Bar tab from 2pm until it runs out. Snacks from 3pm. Happy hour from 4pm.',
+    'When: Saturday 21 November, 1:00 pm – 5:00 pm',
+    'Where: Bloom Potts Point, 66–68 Kellett St, Potts Point. Map: ' + MAP_URL,
+    'What’s on: Antipasto, shared bites and platters all afternoon. Handcrafted cocktails, spritzers, beers and wines at the bar. Pay as you go.',
+    'Entertainment: DJ Alex Taylor, then DJ 1-UP.',
     'Dress code: ' + EVENT.dress,
-    'Getting there: Martin Place station is a short walk. The Metro is across the road. Lift access to Level 5.',
+    'Getting there: Kings Cross train station is a short walk. Street parking is very limited. Uber and taxi drop-off is at the corner of Roslyn Street and Ward Avenue.',
     '',
     'Add to calendar (Apple or Outlook): ' + ICS_URL,
     'Google Calendar (needs a Google sign-in): ' + gcal,
     '',
-    'Dietary needs or allergies? Reply to this email.',
+    'Dietary needs or allergies? Reply to this email and Brad will pass them on to the venue.',
     'Plans change? Reply to this email or RSVP again at ' + SITE + ' with the same mobile or email.',
     '',
-    'See you at the Wentworth Bar.',
+    'See you at Bloom.',
     'Brad'
   ].filter(l => l !== null).join('\n');
 

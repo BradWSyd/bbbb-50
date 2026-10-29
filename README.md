@@ -9,7 +9,7 @@ A one-page RSVP site on True Black. Replies land in a Google Sheet. Each guest g
 - `assets/years/` — the memories photos, invites and video clips (`<year>-v<n>.mp4` + `.jpg` poster), shrunk for phones
 - `assets/bbbb50-shimmer.mp4`, `bbbb50-sweep-sq.mp4`, `bbbb50-still.jpg`, `bbbb50-sweep-end.jpg` — v3 colour-sweep logo: hero loop, paint-on, and their stills
 - `assets/bbbb-mark.png` — the brush-script B.B.B.B FIFTY mark on True Black
-- `assets/bbbb50-share.jpg` — the 1200×630 link preview for WhatsApp, iMessage and social. `favicon-32.png` and `apple-touch-icon.png` are the tab and home-screen icons
+- `assets/bbbb50-share-v2.jpg` — the 1200×630 link preview for WhatsApp, iMessage and social. `favicon-32.png` and `apple-touch-icon.png` are the tab and home-screen icons
 - `apps-script/Code.gs` — the backend that logs rows and sends emails
 
 ## Set up (about 20 minutes)

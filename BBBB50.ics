@@ -5,20 +5,20 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:bbbb50-20261121@bbbb-50
-DTSTAMP:20261022T110000Z
-SEQUENCE:2
-DTSTART:20261121T030000Z
-DTEND:20261121T070000Z
+DTSTAMP:20261029T120000Z
+SEQUENCE:3
+DTSTART:20261121T020000Z
+DTEND:20261121T060000Z
 SUMMARY:B.B.B.B 50 – Brad’s Big Birthday Bash
-LOCATION:Wentworth Bar (Level 5)\, Sofitel Sydney Wentworth\, 61-101 Philli
- p Street\, Sydney NSW 2000
-GEO:-33.86558;151.21101
-X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS="61-101 Phillip Street\\nSy
- dney NSW 2000\\nAustralia";X-APPLE-RADIUS=60;X-TITLE="Wentworth Bar, Sofit
- el Sydney Wentworth":geo:-33.86558,151.21101
-DESCRIPTION:Bar tab from 2pm. Snacks from 3pm. Happy hour from 4pm. Dress c
- ode: garden party vibes. Wentworth Bar is on level 5 of the Sofitel Sydney
-  Wentworth\, 61-101 Phillip Street. https://bbbb50.brad-wright.com
+LOCATION:Bloom Potts Point\, 66-68 Kellett St\, Potts Point NSW 2011
+GEO:-33.87411;151.22456
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS="66-68 Kellett St\\nPotts P
+ oint NSW 2011\\nAustralia";X-APPLE-RADIUS=60;X-TITLE="Bloom Potts Point":g
+ eo:-33.87411,151.22456
+DESCRIPTION:Antipasto\, shared bites and platters. Pay-as-you-go bar. DJs A
+ lex Taylor and 1-UP. Dress code: garden party vibes\, splashes of colour a
+ nd your best sunnies. Bloom Potts Point\, 66-68 Kellett St\, Potts Point. 
+ https://bbbb50.brad-wright.com
 URL:https://bbbb50.brad-wright.com
 END:VEVENT
 END:VCALENDAR
